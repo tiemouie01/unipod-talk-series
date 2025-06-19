@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -127,7 +127,14 @@
 
 /* Custom Unipod styles */
 .gradient-bg {
-  background: linear-gradient(135deg, #1d9ed9 0%, #87ceeb 25%, #f4d41b 50%, #ffd700 75%, #1d9ed9 100%);
+  background: linear-gradient(
+    135deg,
+    #1d9ed9 0%,
+    #87ceeb 25%,
+    #f4d41b 50%,
+    #ffd700 75%,
+    #1d9ed9 100%
+  );
 }
 
 .gradient-text {
@@ -138,27 +145,27 @@
 }
 
 .card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-8px);
   box-shadow: 0 25px 50px -12px rgba(29, 158, 217, 0.25);
 }
 
 .unipod-border {
   border: 2px solid transparent;
-  background: linear-gradient(white, white) padding-box, linear-gradient(135deg, #1d9ed9, #f4d41b, #1d9ed9) border-box;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #1d9ed9, #f4d41b, #1d9ed9) border-box;
 }
 
 .seat {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 8px;
   border: 2px solid transparent;
 }
 
 .seat:hover {
-  transform: scale(1.1);
   box-shadow: 0 8px 25px rgba(29, 158, 217, 0.15);
 }
 
@@ -194,20 +201,6 @@
   }
   50% {
     opacity: 0.8;
-  }
-}
-
-.floating-animation {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
   }
 }
 
