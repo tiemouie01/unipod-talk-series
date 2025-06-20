@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 import {
   Calendar,
   Clock,
@@ -18,7 +19,6 @@ import { LotteryModal } from "@/components/lottery-modal";
 import { SeatMap } from "@/components/seat-map";
 import { CountdownTimer } from "@/components/countdown-timer";
 import { LotteryWinners } from "@/components/lottery-winners";
-import Link from "next/link";
 
 // Mock data - in a real app, this would come from an API
 const currentEvent = {
@@ -74,67 +74,38 @@ export default function HomePage() {
     currentEvent.reservedSeats >= 64 && !currentEvent.lotteryAssigned;
 
   return (
-    <div className="gradient-bg flex min-h-screen flex-col">
-      {/* Animated Background Elements - now using grid for layout */}
-      <div className="mt-20 mb-8 flex h-0 w-full flex-row items-start justify-center gap-8">
-        <div className="h-32 w-32 animate-pulse rounded-full bg-blue-400/20 blur-xl" />
-        <div className="h-24 w-24 animate-pulse rounded-full bg-yellow-400/20 blur-xl" />
-        <div className="h-40 w-40 animate-pulse rounded-full bg-blue-500/20 blur-xl" />
-        <div className="h-28 w-28 animate-pulse rounded-full bg-yellow-500/20 blur-xl" />
+    <div
+      className="grid min-h-screen w-full"
+      style={{ gridTemplateRows: "1fr" }}
+    >
+      {/* Full-page background image and dark overlay using grid */}
+      <div className="col-start-1 row-start-1 grid h-full w-full">
+        <Image
+          src="/unipod_banner.jpg"
+          alt="Unipod Banner"
+          fill
+          className="h-full w-full object-cover"
+          priority
+        />
+        <div
+          className="absolute inset-0 h-full w-full bg-black/60"
+          style={{ gridArea: "1 / 1 / 2 / 2" }}
+        />
       </div>
 
-      {/* Header */}
-      <header className="w-full border-b border-white/20 bg-white/95 shadow-lg backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-r from-[#1d9ed9] to-[#f4d41b]">
-                  <Sparkles className="h-6 w-6 text-white" />
-                </div>
-                <h1 className="gradient-text text-3xl font-bold">
-                  Unipod Talks
-                </h1>
-              </div>
-              <Badge className="bg-linear-to-r from-[#1d9ed9] to-[#f4d41b] px-4 py-2 text-sm font-semibold text-white">
-                🔥 Live Event Registration
-              </Badge>
-            </div>
-            <nav className="flex space-x-8">
-              <Link
-                href="/"
-                className="text-lg font-semibold text-gray-800 transition-colors hover:text-[#1d9ed9]"
-              >
-                Current Event
-              </Link>
-              <Link
-                href="/history"
-                className="text-lg font-semibold text-gray-600 transition-colors hover:text-[#1d9ed9]"
-              >
-                Past Events
-              </Link>
-              <Link
-                href="/admin"
-                className="text-lg font-semibold text-gray-600 transition-colors hover:text-[#1d9ed9]"
-              >
-                Admin
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      <main className="flex w-full flex-1 flex-col items-center">
-        <div className="relative w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      {/* Main content with glassy containers */}
+      <main className="flex w-full flex-1 flex-col items-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid w-full max-w-7xl gap-12">
           <div className="mb-12 grid grid-cols-1 gap-12 xl:grid-cols-2">
             {/* Event Poster */}
             <div className="space-y-8">
-              <Card className="card-hover unipod-border overflow-hidden bg-white/90 backdrop-blur-xs">
+              <Card className="card-hover unipod-border overflow-hidden bg-white/60 shadow-xl backdrop-blur-lg">
                 <div className="flex aspect-3/4 flex-col justify-end">
-                  <img
+                  <Image
                     src={currentEvent.poster || "/placeholder.svg"}
                     alt={currentEvent.title}
                     className="h-full w-full object-cover"
+                    fill
                   />
                   <div className="flex flex-col gap-3 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 text-white">
                     <div className="mb-3 flex items-center gap-2">
@@ -168,10 +139,10 @@ export default function HomePage() {
                 />
               </div>
 
-              <Card className="card-hover unipod-border unipod-glow bg-white/90 backdrop-blur-xs">
+              <Card className="card-hover unipod-border unipod-glow bg-white/60 shadow-xl backdrop-blur-lg">
                 <CardHeader className="pb-4">
                   <CardTitle className="flex items-center gap-3 text-2xl">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-r from-[#1d9ed9] to-[#f4d41b]">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
                       <Calendar className="h-5 w-5 text-white" />
                     </div>
                     <span className="gradient-text">Event Details</span>
@@ -179,8 +150,8 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid grid-cols-1 gap-4">
-                    <div className="flex items-center gap-4 rounded-xl bg-linear-to-r from-blue-50 to-[#1d9ed9]/10 p-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-r from-[#1d9ed9] to-blue-600">
+                    <div className="flex items-center gap-4 rounded-xl bg-white/40 p-4 backdrop-blur">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
                         <Clock className="h-5 w-5 text-white" />
                       </div>
                       <div>
@@ -194,8 +165,8 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 rounded-xl bg-linear-to-r from-green-50 to-teal-50 p-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-r from-green-500 to-teal-600">
+                    <div className="flex items-center gap-4 rounded-xl bg-white/40 p-4 backdrop-blur">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
                         <MapPin className="h-5 w-5 text-white" />
                       </div>
                       <div>
@@ -204,8 +175,8 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 rounded-xl bg-linear-to-r from-[#f4d41b]/20 to-yellow-50 p-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-r from-[#f4d41b] to-yellow-500">
+                    <div className="flex items-center gap-4 rounded-xl bg-white/40 p-4 backdrop-blur">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-yellow-400">
                         <Users className="h-5 w-5 text-black" />
                       </div>
                       <div>
@@ -220,8 +191,8 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 rounded-xl bg-linear-to-r from-[#1d9ed9]/20 to-blue-50 p-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-r from-[#1d9ed9] to-blue-600">
+                    <div className="flex items-center gap-4 rounded-xl bg-white/40 p-4 backdrop-blur">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600">
                         <Ticket className="h-5 w-5 text-white" />
                       </div>
                       <div>
@@ -242,7 +213,7 @@ export default function HomePage() {
                       {availableSeats > 0 ? (
                         <Button
                           onClick={() => setShowReservationModal(true)}
-                          className="w-full transform rounded-xl bg-linear-to-r from-[#1d9ed9] to-blue-600 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-[#1d9ed9]/90 hover:to-blue-700 hover:shadow-xl"
+                          className="w-full transform rounded-xl bg-blue-600 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700 hover:shadow-xl"
                         >
                           <Sparkles className="mr-2 h-5 w-5" />
                           Reserve Your Seat Now!
@@ -259,7 +230,7 @@ export default function HomePage() {
                       {canReserveLottery && (
                         <Button
                           onClick={() => setShowLotteryModal(true)}
-                          className="w-full transform rounded-xl bg-linear-to-r from-[#f4d41b] to-yellow-500 py-4 text-lg font-bold text-black shadow-lg transition-all duration-300 hover:scale-105 hover:from-[#f4d41b]/90 hover:to-yellow-600 hover:shadow-xl"
+                          className="w-full transform rounded-xl bg-yellow-400 py-4 text-lg font-bold text-black shadow-lg transition-all duration-300 hover:scale-105 hover:bg-yellow-500 hover:shadow-xl"
                         >
                           <Zap className="mr-2 h-5 w-5" />
                           Enter Lottery (Last 6 Seats)
@@ -276,14 +247,14 @@ export default function HomePage() {
           </div>
 
           {/* Seat Map */}
-          <Card className="card-hover unipod-border unipod-glow bg-white/90 backdrop-blur-xs">
+          <Card className="card-hover unipod-border unipod-glow bg-white/60 shadow-xl backdrop-blur-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-3 text-2xl">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-r from-[#1d9ed9] to-[#f4d41b]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
                   <Users className="h-5 w-5 text-white" />
                 </div>
                 <span className="gradient-text">Live Seat Map</span>
-                <Badge className="animate-pulse bg-linear-to-r from-[#1d9ed9] to-[#f4d41b] text-white">
+                <Badge className="animate-pulse bg-blue-600 text-white">
                   Real-time Updates
                 </Badge>
               </CardTitle>

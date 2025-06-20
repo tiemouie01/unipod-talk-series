@@ -219,14 +219,14 @@ export default function AdminPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-r from-[#1d9ed9] to-[#f4d41b]">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600">
                   <Users className="h-6 w-6 text-white" />
                 </div>
                 <h1 className="gradient-text text-3xl font-bold">
                   Unipod Talks
                 </h1>
               </div>
-              <Badge className="bg-linear-to-r from-green-500 to-emerald-600 px-4 py-2 text-sm font-semibold text-white">
+              <Badge className="bg-[#f4d41b] px-4 py-2 text-sm font-semibold text-black">
                 🛠️ Admin Dashboard
               </Badge>
             </div>
@@ -269,13 +269,13 @@ export default function AdminPage() {
             <TabsList className="grid w-full grid-cols-2 bg-white/90 backdrop-blur-xs">
               <TabsTrigger
                 value="events"
-                className="data-[state=active]:bg-linear-to-r data-[state=active]:from-[#1d9ed9] data-[state=active]:to-blue-600 data-[state=active]:text-white"
+                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
               >
                 Events Management
               </TabsTrigger>
               <TabsTrigger
                 value="reservations"
-                className="data-[state=active]:bg-linear-to-r data-[state=active]:from-[#f4d41b] data-[state=active]:to-yellow-500 data-[state=active]:text-black"
+                className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
               >
                 All Reservations
               </TabsTrigger>
@@ -286,7 +286,7 @@ export default function AdminPage() {
                 <h3 className="gradient-text text-2xl font-semibold">Events</h3>
                 <Button
                   onClick={handleCreateEvent}
-                  className="rounded-xl bg-linear-to-r from-[#1d9ed9] to-blue-600 font-bold text-white shadow-lg hover:from-[#1d9ed9]/90 hover:to-blue-700"
+                  className="rounded-xl bg-blue-600 font-bold text-white shadow-lg hover:bg-blue-700"
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Create Event
@@ -321,7 +321,7 @@ export default function AdminPage() {
                                       }
                                       className={
                                         event.status === "active"
-                                          ? "bg-linear-to-r from-green-500 to-emerald-600 text-white"
+                                          ? "bg-blue-600 text-white"
                                           : ""
                                       }
                                     >
@@ -343,7 +343,7 @@ export default function AdminPage() {
                                       <Users className="h-4 w-4" />
                                       {event.reservations} reservations
                                     </span>
-                                    <span className="font-semibold text-[#f4d41b]">
+                                    <span className="font-semibold text-yellow-500">
                                       {event.lotteryEntries} lottery entries
                                     </span>
                                   </div>
@@ -357,7 +357,7 @@ export default function AdminPage() {
                                     e.stopPropagation();
                                     handleEditEvent(event);
                                   }}
-                                  className="hover:bg-[#1d9ed9] hover:text-white"
+                                  className="hover:bg-blue-600 hover:text-white"
                                 >
                                   <Edit className="h-4 w-4" />
                                 </Button>
@@ -379,7 +379,7 @@ export default function AdminPage() {
                             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                               {/* Regular Reservations */}
                               <div className="space-y-4">
-                                <h5 className="flex items-center gap-2 text-lg font-semibold text-[#1d9ed9]">
+                                <h5 className="flex items-center gap-2 text-lg font-semibold text-blue-600">
                                   <Users className="h-5 w-5" />
                                   Regular Reservations (
                                   {getEventReservations(event.id).length})
@@ -389,12 +389,12 @@ export default function AdminPage() {
                                     (reservation) => (
                                       <div
                                         key={reservation.id}
-                                        className="rounded-xl border border-blue-200 bg-linear-to-r from-blue-50 to-[#1d9ed9]/10 p-4"
+                                        className="rounded-xl border border-blue-200 bg-blue-50 p-4"
                                       >
                                         <div className="flex items-start justify-between">
                                           <div className="space-y-2">
                                             <div className="flex items-center gap-2">
-                                              <User className="h-4 w-4 text-[#1d9ed9]" />
+                                              <User className="h-4 w-4 text-blue-600" />
                                               <span className="font-semibold">
                                                 {reservation.name}
                                               </span>
@@ -441,7 +441,7 @@ export default function AdminPage() {
 
                               {/* Lottery Entries */}
                               <div className="space-y-4">
-                                <h5 className="flex items-center gap-2 text-lg font-semibold text-[#f4d41b]">
+                                <h5 className="flex items-center gap-2 text-lg font-semibold text-yellow-500">
                                   <Calendar className="h-5 w-5" />
                                   Lottery Entries (
                                   {getEventLotteryEntries(event.id).length})
@@ -451,12 +451,12 @@ export default function AdminPage() {
                                     (entry) => (
                                       <div
                                         key={entry.id}
-                                        className="rounded-xl border border-yellow-200 bg-linear-to-r from-[#f4d41b]/20 to-yellow-50 p-4"
+                                        className="rounded-xl border border-yellow-200 bg-yellow-50 p-4"
                                       >
                                         <div className="flex items-start justify-between">
                                           <div className="space-y-2">
                                             <div className="flex items-center gap-2">
-                                              <User className="h-4 w-4 text-[#f4d41b]" />
+                                              <User className="h-4 w-4 text-yellow-500" />
                                               <span className="font-semibold">
                                                 {entry.name}
                                               </span>
@@ -543,8 +543,8 @@ export default function AdminPage() {
                               }
                               className={
                                 reservation.type === "regular"
-                                  ? "bg-linear-to-r from-[#1d9ed9] to-blue-600 text-white"
-                                  : "bg-linear-to-r from-[#f4d41b] to-yellow-500 text-black"
+                                  ? "bg-blue-600 text-white"
+                                  : "bg-blue-600 text-white"
                               }
                             >
                               {reservation.type}
@@ -596,7 +596,7 @@ export default function AdminPage() {
                     setEventForm({ ...eventForm, title: e.target.value })
                   }
                   required
-                  className="focus:border-[#1d9ed9] focus:ring-[#1d9ed9]"
+                  className="focus:border-blue-600 focus:ring-blue-600"
                 />
               </div>
 
@@ -609,7 +609,7 @@ export default function AdminPage() {
                     setEventForm({ ...eventForm, speaker: e.target.value })
                   }
                   required
-                  className="focus:border-[#1d9ed9] focus:ring-[#1d9ed9]"
+                  className="focus:border-blue-600 focus:ring-blue-600"
                 />
               </div>
 
@@ -621,7 +621,7 @@ export default function AdminPage() {
                   onChange={(e) =>
                     setEventForm({ ...eventForm, speakerTitle: e.target.value })
                   }
-                  className="focus:border-[#1d9ed9] focus:ring-[#1d9ed9]"
+                  className="focus:border-blue-600 focus:ring-blue-600"
                 />
               </div>
 
@@ -636,7 +636,7 @@ export default function AdminPage() {
                       setEventForm({ ...eventForm, date: e.target.value })
                     }
                     required
-                    className="focus:border-[#1d9ed9] focus:ring-[#1d9ed9]"
+                    className="focus:border-blue-600 focus:ring-blue-600"
                   />
                 </div>
 
@@ -650,7 +650,7 @@ export default function AdminPage() {
                       setEventForm({ ...eventForm, time: e.target.value })
                     }
                     required
-                    className="focus:border-[#1d9ed9] focus:ring-[#1d9ed9]"
+                    className="focus:border-blue-600 focus:ring-blue-600"
                   />
                 </div>
               </div>
@@ -664,7 +664,7 @@ export default function AdminPage() {
                     setEventForm({ ...eventForm, description: e.target.value })
                   }
                   rows={3}
-                  className="focus:border-[#1d9ed9] focus:ring-[#1d9ed9]"
+                  className="focus:border-blue-600 focus:ring-blue-600"
                 />
               </div>
 
@@ -677,7 +677,7 @@ export default function AdminPage() {
                     setEventForm({ ...eventForm, poster: e.target.value })
                   }
                   placeholder="https://example.com/poster.jpg"
-                  className="focus:border-[#1d9ed9] focus:ring-[#1d9ed9]"
+                  className="focus:border-blue-600 focus:ring-blue-600"
                 />
               </div>
 
@@ -692,7 +692,7 @@ export default function AdminPage() {
                 </Button>
                 <Button
                   type="submit"
-                  className="flex-1 bg-linear-to-r from-[#1d9ed9] to-blue-600 font-bold text-white hover:from-[#1d9ed9]/90 hover:to-blue-700"
+                  className="flex-1 bg-blue-600 font-bold text-white hover:bg-blue-700"
                 >
                   {editingEvent ? "Update Event" : "Create Event"}
                 </Button>

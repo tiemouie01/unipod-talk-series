@@ -127,18 +127,11 @@
 
 /* Custom Unipod styles */
 .gradient-bg {
-  background: linear-gradient(
-    135deg,
-    #1d9ed9 0%,
-    #87ceeb 25%,
-    #f4d41b 50%,
-    #ffd700 75%,
-    #1d9ed9 100%
-  );
+  background: linear-gradient(135deg, #1d9ed9 0%, #3b82f6 50%, #87ceeb 100%);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #1d9ed9, #f4d41b, #1d9ed9);
+  background: linear-gradient(90deg, #1d9ed9, #3b82f6, #87ceeb);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -156,7 +149,7 @@
   border: 2px solid transparent;
   background:
     linear-gradient(white, white) padding-box,
-    linear-gradient(135deg, #1d9ed9, #f4d41b, #1d9ed9) border-box;
+    linear-gradient(135deg, #1d9ed9, #3b82f6, #87ceeb) border-box;
 }
 
 .seat {
