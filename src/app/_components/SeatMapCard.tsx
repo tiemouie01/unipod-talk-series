@@ -11,7 +11,7 @@ type Seat = {
 
 export function SeatMapCard({ seats }: { seats: Seat[] }) {
   return (
-    <Card className="card-hover unipod-border unipod-glow bg-white/60 shadow-xl backdrop-blur-lg">
+    <Card className="card-hover unipod-border unipod-glow bg-white/40 shadow-lg backdrop-blur-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-3 text-2xl">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">

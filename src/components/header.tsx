@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function Header() {
   return (
@@ -6,8 +7,7 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-3">
-            <span className="text-3xl font-bold text-[#1d9ed9]">Uni</span>
-            <span className="text-3xl font-bold text-[#f4d41b]">Pod</span>
+            <Image src="/logo.png" alt="UniPod" width={100} height={100} />
           </div>
         </div>
         <nav className="flex space-x-8">

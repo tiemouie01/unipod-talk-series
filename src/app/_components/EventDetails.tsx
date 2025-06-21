@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Calendar,
   Clock,
@@ -14,8 +13,6 @@ import { CountdownTimer } from "@/components/countdown-timer";
 import { LotteryWinners } from "@/components/lottery-winners";
 import React from "react";
 import type { EventData } from "./EventPoster";
-
-type SeatStatus = "available" | "reserved" | "lottery" | "lottery-winner";
 
 export function EventDetails({
   currentEvent,
@@ -37,7 +34,7 @@ export function EventDetails({
           targetDate={new Date(currentEvent.date + "T" + currentEvent.time)}
         />
       </div>
-      <Card className="card-hover unipod-border unipod-glow bg-white/60 shadow-xl backdrop-blur-lg">
+      <Card className="card-hover unipod-border unipod-glow bg-white/40 shadow-lg backdrop-blur-md">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-3 text-2xl">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">

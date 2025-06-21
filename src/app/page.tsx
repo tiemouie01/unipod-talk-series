@@ -49,8 +49,11 @@ export default function HomePage() {
 
     // Mark last 6 seats as lottery if regular seats are almost full
     if (currentEvent.reservedSeats >= 64) {
-      for (let i = 64; i < initialSeats.length; i++) {
-        initialSeats[i].status = "lottery";
+      for (let i = 64; i < 70; i++) {
+        const seat = initialSeats[i];
+        if (seat) {
+          seat.status = "lottery";
+        }
       }
     }
 
