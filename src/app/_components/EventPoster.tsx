@@ -23,10 +23,10 @@ export interface EventData {
 
 export function EventPoster({ currentEvent }: { currentEvent: EventData }) {
   return (
-    <Card className="card-hover unipod-border overflow-hidden bg-white/40 shadow-lg backdrop-blur-md">
+    <Card className="overflow-hidden bg-white/40 shadow-lg backdrop-blur-md">
       <div className="flex aspect-3/4 flex-col justify-end">
         <Image
-          src={currentEvent.poster ?? "/placeholder.svg"}
+          src={currentEvent.poster ?? "/unipod_banner.jpg"}
           alt={currentEvent.title}
           className="h-full w-full object-cover"
           fill

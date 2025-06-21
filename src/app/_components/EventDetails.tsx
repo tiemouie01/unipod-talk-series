@@ -34,7 +34,7 @@ export function EventDetails({
           targetDate={new Date(currentEvent.date + "T" + currentEvent.time)}
         />
       </div>
-      <Card className="card-hover unipod-border unipod-glow bg-white/40 shadow-lg backdrop-blur-md">
+      <Card className="unipod-glow bg-white/40 shadow-lg backdrop-blur-md">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-3 text-2xl">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
