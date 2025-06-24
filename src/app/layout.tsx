@@ -9,9 +9,8 @@ import { Header } from "@/components/header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Unipod Talks - Event Registration",
+  title: "Unipod Talk Series- Event Registration",
   description: "Register for exciting talks at Unipod Malawi",
-  generator: "v0.dev",
 };
 
 export default function RootLayout({
