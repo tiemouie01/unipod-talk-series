@@ -9,9 +9,8 @@ import { Header } from "@/components/header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Unipod Talks - Event Registration",
+  title: "Unipod Talk Series- Event Registration",
   description: "Register for exciting talks at Unipod Malawi",
-  generator: "v0.dev",
 };
 
 export default function RootLayout({
@@ -44,7 +43,7 @@ export default function RootLayout({
           {/* Content scrolls in the second row */}
           <div className="col-start-1 row-start-2 overflow-auto">
             {children}
-            <Toaster />
+            <Toaster richColors />
           </div>
         </div>
       </body>

@@ -23,15 +23,19 @@ export interface EventData {
 
 export function EventPoster({ currentEvent }: { currentEvent: EventData }) {
   return (
-    <Card className="overflow-hidden bg-white/40 shadow-lg backdrop-blur-md">
-      <div className="flex aspect-3/4 flex-col justify-end">
+    <Card className="grid h-full w-full overflow-hidden bg-white/40 p-0 shadow-lg backdrop-blur-md">
+      <div className="grid grid-cols-1 grid-rows-1">
+        {/* Image as background layer */}
         <Image
           src={currentEvent.poster ?? "/unipod_banner.jpg"}
           alt={currentEvent.title}
-          className="h-full w-full object-cover"
+          className="col-start-1 row-start-1 h-full w-full object-cover"
           fill
         />
-        <div className="flex flex-col gap-3 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 text-white">
+        {/* Overlay layer */}
+        <div className="z-10 col-start-1 row-start-1 h-full w-full bg-black/60" />
+        {/* Content layer */}
+        <div className="z-20 col-start-1 row-start-1 flex flex-col justify-end gap-3 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 text-white">
           <div className="mb-3 flex items-center gap-2">
             <Zap className="h-5 w-5 text-[#f4d41b]" />
             <Badge className="bg-[#f4d41b] font-bold text-black">
