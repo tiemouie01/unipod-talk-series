@@ -1,4 +1,4 @@
-import { pgTable, uuid, timestamp, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, uuid, timestamp, pgEnum, text } from "drizzle-orm/pg-core";
 import { event } from "./event";
 import { user } from "./auth-schema";
 
@@ -6,7 +6,7 @@ export const activityType = pgEnum("activity_type", ["create_event", "delete_eve
 export const eventActivityLog = pgTable("event_activity_log",{
     id: uuid("id").primaryKey().defaultRandom(),
     eventId: uuid("event_id").notNull().references(() => event.id),
-    userId: uuid("user_id").notNull().references(() => user.id),
+    userId: text("user_id").notNull().references(() => user.id),
     activityType: activityType("activity_type").notNull(),
     createdAt: timestamp("created_at").notNull(),
 })

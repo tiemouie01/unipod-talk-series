@@ -1,3 +1,5 @@
+CREATE TYPE "public"."status" AS ENUM('pending', 'active', 'cancelled');--> statement-breakpoint
+CREATE TYPE "public"."activity_type" AS ENUM('create_event', 'delete_event', 'update_event', 'create_lucky_draw', 'delete_lucky_draw', 'update_lucky_draw', 'create_reservation', 'delete_reservation', 'update_reservation');--> statement-breakpoint
 CREATE TABLE "account" (
 	"id" text PRIMARY KEY NOT NULL,
 	"account_id" text NOT NULL,
@@ -23,6 +25,7 @@ CREATE TABLE "session" (
 	"ip_address" text,
 	"user_agent" text,
 	"user_id" text NOT NULL,
+	"impersonated_by" text,
 	CONSTRAINT "session_token_unique" UNIQUE("token")
 );
 --> statement-breakpoint
@@ -34,6 +37,10 @@ CREATE TABLE "user" (
 	"image" text,
 	"created_at" timestamp NOT NULL,
 	"updated_at" timestamp NOT NULL,
+	"role" text,
+	"banned" boolean,
+	"ban_reason" text,
+	"ban_expires" timestamp,
 	CONSTRAINT "user_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
@@ -83,7 +90,7 @@ CREATE TABLE "lucky_draw_winners" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"event_id" uuid NOT NULL,
 	"lucky_draw_id" uuid NOT NULL,
-	"user_id" uuid NOT NULL,
+	"user_id" text NOT NULL,
 	"created_at" timestamp NOT NULL,
 	"updated_at" timestamp NOT NULL
 );
@@ -102,7 +109,7 @@ CREATE TABLE "reservation" (
 CREATE TABLE "event_activity_log" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"event_id" uuid NOT NULL,
-	"user_id" uuid NOT NULL,
+	"user_id" text NOT NULL,
 	"activity_type" "activity_type" NOT NULL,
 	"created_at" timestamp NOT NULL
 );
