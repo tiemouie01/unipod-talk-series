@@ -17,7 +17,7 @@ export function Header() {
           >
             Home
           </Link>
-          <Link
+          {/* <Link
             href="/history"
             className="text-lg font-semibold text-gray-600 transition-colors hover:text-[#1d9ed9]"
           >
@@ -28,7 +28,7 @@ export function Header() {
             className="text-lg font-semibold text-gray-600 transition-colors hover:text-[#1d9ed9]"
           >
             Admin
-          </Link>
+          </Link> */}
         </nav>
       </div>
     </header>
