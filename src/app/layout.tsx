@@ -43,7 +43,7 @@ export default function RootLayout({
           {/* Content scrolls in the second row */}
           <div className="col-start-1 row-start-2 overflow-auto">
             {children}
-            <Toaster />
+            <Toaster richColors />
           </div>
         </div>
       </body>
