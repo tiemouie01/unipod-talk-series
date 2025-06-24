@@ -19,7 +19,7 @@ const currentEvent = {
   venue: "Unipod Malawi",
   description:
     "Join us for an insightful discussion on how artificial intelligence is shaping the future of technology and innovation across Africa.",
-  poster: "/placeholder.svg?height=600&width=400",
+  poster: "/test-poster.jpg",
   totalSeats: 70,
   reservedSeats: 45,
   lotterySeats: 6,
