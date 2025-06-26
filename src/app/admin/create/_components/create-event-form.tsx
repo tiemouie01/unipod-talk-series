@@ -26,6 +26,8 @@ import { createEventSchema } from "@/validation/events";
 import type { CreateEventFormData } from "@/types/events";
 import { UploadButton } from "@/lib/uploadthing";
 import Image from "next/image";
+import { createEventAction } from "@/server/actions";
+
 
 export function CreateEventForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -49,10 +51,19 @@ export function CreateEventForm() {
   const onSubmit = async (data: CreateEventFormData) => {
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Event created:", { ...data });
+      toast.loading("Creating Event Please Wait")
+      const {eventdata, error} = await createEventAction(data)
+      if (error) {
+        toast.dismiss()
+        toast.error(error)
+        return
+      }
+      toast.dismiss()
+      toast.success("Event Created Successfully",{
+        description:`${eventdata?.title} event was created successfully`
+      })
       form.reset();
+      setPreviewUrl("")
     } catch (error) {
       console.error("Error creating event:", error);
     } finally {
@@ -217,7 +228,7 @@ export function CreateEventForm() {
                                 "Banner image uploaded successfully.",
                               );
                               form.setValue("bannerURL", res[0].ufsUrl);
-                              setPreviewUrl(res[0].ufsUrl);
+                              setPreviewUrl(form.getValues("bannerURL"));
                             }
                           }}
                         />

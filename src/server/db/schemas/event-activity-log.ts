@@ -8,5 +8,5 @@ export const eventActivityLog = pgTable("event_activity_log",{
     eventId: uuid("event_id").notNull().references(() => event.id),
     userId: text("user_id").notNull().references(() => user.id),
     activityType: activityType("activity_type").notNull(),
-    createdAt: timestamp("created_at").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
 })
