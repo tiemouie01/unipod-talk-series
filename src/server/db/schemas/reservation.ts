@@ -3,7 +3,7 @@ import { event } from "./event";
 import { user } from "./auth-schema";
 import { seat } from "./seat";
 
-const status = pgEnum("status", ["pending", "active", "cancelled"])
+export const status = pgEnum("status", ["pending", "active", "cancelled"])
 export const reservation = pgTable("reservation", {
     id: uuid("id").primaryKey().defaultRandom(),
     userId: text("user_id").notNull().references(() => user.id),

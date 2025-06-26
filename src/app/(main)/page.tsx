@@ -12,14 +12,14 @@ import { SeatMapCard } from "./_components/SeatMapCard";
 const currentEvent = {
   id: 1,
   title: "The Future of AI in Africa",
-  speaker: "Dr. Amelia Taylor",
+  speaker: "Dr. Amina Kone",
   speakerTitle: "AI Research Director",
-  date: "2025-07-15",
+  date: "2024-02-15",
   time: "18:00",
   venue: "Unipod Malawi",
   description:
     "Join us for an insightful discussion on how artificial intelligence is shaping the future of technology and innovation across Africa.",
-  poster: "/test-poster.jpg",
+  poster: "/placeholder.svg?height=600&width=400",
   totalSeats: 70,
   reservedSeats: 45,
   lotterySeats: 6,
