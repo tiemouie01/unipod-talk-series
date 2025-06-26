@@ -61,9 +61,12 @@ export function AppSidebar() {
     <div className="fixed left-0 top-0 h-full w-64 bg-slate-900/95 border-r border-blue-800/30 backdrop-blur-sm">
       <Sidebar className="bg-transparent border-none">
         <SidebarHeader className="p-6 border-b border-blue-800/30 bg-slate-800/50">
-          <div className="flex items-center gap-3">
-            <Link href="/">
-              <Image src="/logo.png" alt="UniPod Logo" width={120} height={40} className="h-8 w-auto" />
+          <div className="flex justify-center">
+            <Link href="/" className="flex flex-col items-center gap-2">
+              <Image src="/logo.png" alt="UniPod Logo" width={120} height={40} className="h-10 w-auto" />
+              <span className="bg-gradient-to-r from-blue-400 to-yellow-400 bg-clip-text text-xl font-extrabold text-transparent">
+                Talks Series
+              </span>
             </Link>
           </div>
         </SidebarHeader>
@@ -79,18 +82,18 @@ export function AppSidebar() {
                     <SidebarMenuButton asChild>
                       <Link
                         href={item.href}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
                           item.href === "/admin/" 
                             ? (pathname === "/admin" || pathname === "/admin/")
-                              ? "bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"
-                              : "text-slate-300 hover:bg-blue-500/20 hover:text-blue-200"
+                              ? "bg-blue-900/40 text-blue-400"
+                              : "text-slate-300 hover:bg-blue-900/30 hover:text-blue-400"
                             : item.href === "/admin/events"
                               ? (pathname === "/admin/events" || pathname === "/admin/events/")
-                                ? "bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"
-                                : "text-slate-300 hover:bg-blue-500/20 hover:text-blue-200"
+                                ? "bg-blue-900/40 text-blue-400"
+                                : "text-slate-300 hover:bg-blue-900/30 hover:text-blue-400"
                               : pathname === item.href || pathname === `${item.href}/`
-                                ? "bg-blue-500/20 text-blue-300 hover:bg-blue-500/30"
-                                : "text-slate-300 hover:bg-blue-500/20 hover:text-blue-200"
+                                ? "bg-blue-900/40 text-blue-400"
+                                : "text-slate-300 hover:bg-blue-900/30 hover:text-blue-400"
                         }`}
                       >
                         <item.icon className="h-5 w-5" />
