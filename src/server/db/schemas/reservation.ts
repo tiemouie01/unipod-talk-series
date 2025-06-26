@@ -11,6 +11,6 @@ export const reservation = pgTable("reservation", {
     seatId: uuid("seat_id").notNull().references(() => seat.id),
     status: status("status").notNull().default("active"),
     isLuckyDraw: boolean("is_lucky_draw").notNull().default(false),
-    createdAt: timestamp("created_at").notNull(),
-    updatedAt: timestamp("updated_at").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })

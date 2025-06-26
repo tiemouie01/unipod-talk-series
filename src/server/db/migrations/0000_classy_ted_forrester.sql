@@ -64,8 +64,8 @@ CREATE TABLE "event" (
 	"bannerURL" text,
 	"lucky_draw_enabled" boolean NOT NULL,
 	"createdBy" text,
-	"created_at" timestamp NOT NULL,
-	"updated_at" timestamp NOT NULL
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "seat" (
@@ -75,15 +75,15 @@ CREATE TABLE "seat" (
 	"seat_label" text NOT NULL,
 	"is_reserved" boolean DEFAULT false NOT NULL,
 	"is_lucky_draw" boolean DEFAULT false NOT NULL,
-	"created_at" timestamp NOT NULL,
-	"updated_at" timestamp NOT NULL
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "lucky_draw" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"event_id" uuid NOT NULL,
-	"created_at" timestamp NOT NULL,
-	"updated_at" timestamp NOT NULL
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "lucky_draw_winners" (
@@ -91,8 +91,8 @@ CREATE TABLE "lucky_draw_winners" (
 	"event_id" uuid NOT NULL,
 	"lucky_draw_id" uuid NOT NULL,
 	"user_id" text NOT NULL,
-	"created_at" timestamp NOT NULL,
-	"updated_at" timestamp NOT NULL
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "reservation" (
@@ -102,8 +102,8 @@ CREATE TABLE "reservation" (
 	"seat_id" uuid NOT NULL,
 	"status" "status" DEFAULT 'active' NOT NULL,
 	"is_lucky_draw" boolean DEFAULT false NOT NULL,
-	"created_at" timestamp NOT NULL,
-	"updated_at" timestamp NOT NULL
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "event_activity_log" (
@@ -111,7 +111,7 @@ CREATE TABLE "event_activity_log" (
 	"event_id" uuid NOT NULL,
 	"user_id" text NOT NULL,
 	"activity_type" "activity_type" NOT NULL,
-	"created_at" timestamp NOT NULL
+	"created_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 ALTER TABLE "account" ADD CONSTRAINT "account_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint

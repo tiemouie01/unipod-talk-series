@@ -9,7 +9,7 @@ export const seat = pgTable("seat", {
     seatLabel: text("seat_label").notNull(),
     isReserved: boolean("is_reserved").notNull().default(false),
     isLuckyDraw: boolean("is_lucky_draw").notNull().default(false),
-    createdAt: timestamp("created_at").notNull(),
-    updatedAt: timestamp("updated_at").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
     

@@ -1,5 +1,6 @@
 @import "tailwindcss";
-
+@source "../../node_modules/@uploadthing/react/dist"; /** <-- depends on your project structure */
+@import "uploadthing/tw/v4";
 @custom-variant dark (&:is(.dark *));
 
 @theme {
