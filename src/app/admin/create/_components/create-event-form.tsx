@@ -226,9 +226,9 @@ export function CreateEventForm() {
                             <Image
                               src={previewUrl}
                               alt="Event banner preview"
-                              width={1200}
-                              height={400}
-                              className="h-48 w-full object-cover"
+                              width={400}
+                              height={800}
+                              className="h-64 w-full object-cover"
                             />
                           </div>
                         )}
@@ -237,21 +237,6 @@ export function CreateEventForm() {
                     </FormItem>
                   )}
                 />
-                {/* <div>
-                  <Label className="text-slate-300">Event Banner</Label>
-                  <div className="border-2 border-dashed border-blue-600/50 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
-                    <Upload className="h-8 w-8 text-blue-400 mx-auto mb-2" />
-                    <p className="text-slate-400 text-sm">Click to upload or drag and drop</p>
-                    <p className="text-slate-500 text-xs mt-1">PNG, JPG up to 10MB</p>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    />
-                  </div>
-                  {bannerFile && <p className="text-blue-400 text-sm mt-2">Selected: {bannerFile.name}</p>}
-                </div> */}
               </CardContent>
             </Card>
 
