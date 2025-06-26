@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Image from "next/image";
 import { Header } from "@/components/header";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
