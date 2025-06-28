@@ -82,7 +82,7 @@ export function EventCard({ event }: EventCardProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-slate-800 border-blue-700/50">
               <DropdownMenuItem asChild className="text-slate-300 hover:text-white hover:bg-blue-900/30">
-                <Link href={`/events/${event.id}`}>View Details</Link>
+                <Link href={`/admin/events/${event.id}`}>View Details</Link>
               </DropdownMenuItem>
               <DropdownMenuItem className="text-slate-300 hover:text-white hover:bg-blue-900/30">
                 Edit Event
@@ -98,7 +98,7 @@ export function EventCard({ event }: EventCardProps) {
         </div>
       </div>
 
-      <Link href={`/events/${event.id}`}>
+      <Link href={`/admin/events/${event.id}`}>
         <CardHeader className="pb-3">
           <div className="flex items-start justify-between">
             <div className="flex-1">
