@@ -7,38 +7,45 @@ import { Badge } from "@/components/ui/badge"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import Image from "next/image"
 import Link from "next/link"
+import type{ EventManagementValues } from "@/types/events"
 
-interface Event {
-  id: string
-  name: string
-  description: string
-  date: string
-  location: string
-  totalSeats: number
-  registeredSeats: number
-  status: "upcoming" | "active" | "completed" | "cancelled"
-  luckyDrawEnabled: boolean
-  registrationOpen: boolean
-  bannerImage: string
-}
 
 interface EventCardProps {
-  event: Event
+  event: EventManagementValues
 }
 
 export function EventCard({ event }: EventCardProps) {
-  const getStatusColor = (status: string) => {
+  function getEventStatus(eventDate: Date, registrationStartDate: Date | null, registrationEndDate: Date | null): "ended" | "active" | "upcoming" {
+    const now = new Date()
+    const eventDay = new Date(eventDate)
+    
+    // Check if event has ended
+    if (eventDay < now) {
+      return "ended"
+    }
+
+    // Check if within registration period
+    if (registrationStartDate && registrationEndDate) {
+      const regStart = new Date(registrationStartDate)
+      const regEnd = new Date(registrationEndDate)
+      if (now >= regStart && now <= regEnd) {
+        return "active"
+      }
+    }
+
+    return "upcoming"
+  }
+
+  const getStatusColor = (status: "ended" | "active" | "upcoming") => {
     switch (status) {
       case "active":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30"
+        return "bg-green-500/20 text-green-400 border-green-500/30"
       case "upcoming":
-        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-      case "completed":
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30"
-      case "cancelled":
+        return "bg-blue-500/20 text-blue-400 border-blue-500/30"
+      case "ended":
         return "bg-red-500/20 text-red-400 border-red-500/30"
       default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30"
+        return "bg-slate-500/20 text-slate-400 border-slate-500/30"
     }
   }
 
@@ -47,8 +54,8 @@ export function EventCard({ event }: EventCardProps) {
       {/* Banner Image */}
       <div className="relative h-48 w-full overflow-hidden">
         <Image
-          src={event.bannerImage || "/placeholder.svg"}
-          alt={`${event.name} banner`}
+          src={event.bannerURL ?? "/placeholder.svg"}
+          alt={`${event.title} banner`}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -56,7 +63,9 @@ export function EventCard({ event }: EventCardProps) {
 
         {/* Status Badge on Image */}
         <div className="absolute top-3 right-3">
-          <Badge className={getStatusColor(event.status)}>{event.status}</Badge>
+          <Badge className={getStatusColor(getEventStatus(event.eventDate, event.registrationStartDate, event.registrationEndDate))}>
+            {getEventStatus(event.eventDate, event.registrationStartDate, event.registrationEndDate)}
+          </Badge>
         </div>
 
         {/* Dropdown Menu on Image */}
@@ -94,7 +103,7 @@ export function EventCard({ event }: EventCardProps) {
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <CardTitle className="text-white text-lg mb-2 group-hover:text-blue-300 transition-colors">
-                {event.name}
+                {event.title}
               </CardTitle>
               <p className="text-slate-400 text-sm line-clamp-2">{event.description}</p>
             </div>
@@ -105,7 +114,7 @@ export function EventCard({ event }: EventCardProps) {
           <div className="flex items-center gap-4 text-sm text-slate-400">
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4 text-blue-400" />
-              {new Date(event.date).toLocaleDateString()}
+              {new Date(event.eventDate).toLocaleDateString()}
             </div>
             <div className="flex items-center gap-1">
               <MapPin className="h-4 w-4 text-yellow-400" />
@@ -117,7 +126,7 @@ export function EventCard({ event }: EventCardProps) {
             <div className="flex items-center gap-2">
               <Users className="h-4 w-4 text-slate-400" />
               <span className="text-white font-medium">
-                {event.registeredSeats}/{event.totalSeats}
+                {event.reservedSeats}/{event.totalSeats}
               </span>
               <span className="text-slate-400 text-sm">seats</span>
             </div>
@@ -127,17 +136,17 @@ export function EventCard({ event }: EventCardProps) {
           <div className="w-full bg-slate-700 rounded-full h-2">
             <div
               className="bg-gradient-to-r from-blue-500 to-yellow-500 h-2 rounded-full transition-all"
-              style={{ width: `${(event.registeredSeats / event.totalSeats) * 100}%` }}
+              style={{ width: `${(event.reservedSeats! / event.totalSeats!) * 100}%` }}
             />
           </div>
 
           <div className="flex items-center justify-between text-xs">
             <span
               className={`px-2 py-1 rounded-full ${
-                event.registrationOpen ? "bg-blue-500/20 text-blue-400" : "bg-red-500/20 text-red-400"
+                event.registrationStartDate ? "bg-blue-500/20 text-blue-400" : "bg-red-500/20 text-red-400"
               }`}
             >
-              Registration {event.registrationOpen ? "Open" : "Closed"}
+              Registration {event.registrationStartDate ? "Open" : "Closed"}
             </span>
             {event.luckyDrawEnabled && (
               <span className="px-2 py-1 rounded-full bg-yellow-500/20 text-yellow-400">Lucky Draw Enabled</span>
