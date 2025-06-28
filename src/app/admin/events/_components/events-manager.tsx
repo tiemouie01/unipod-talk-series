@@ -7,11 +7,21 @@ import { EventCard } from "./event-card"
 import { getEvents } from "@/server/db/queries"
 import type { EventManagementValues } from "@/types/events"
 import SearchInput from "@/components/search-input"
-
+import { ErrorUI } from "@/components/ui/error"
 
 export async function EventsManager({query}:{query:string}) {
-  const {eventsData} = await getEvents({query:query || ""})
+  const {eventsData,error} = await getEvents({query:query || ""})
 
+  if (error) {
+    return (
+      <div className="min-h-[50vh] grid place-items-center">
+        <ErrorUI 
+          title="Failed to load events" 
+          message="There was an error loading the events. Please try refreshing the page."
+        />
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-6">
