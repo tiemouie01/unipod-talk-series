@@ -1,10 +1,10 @@
 "use server";
 
-import { and, asc, eq, gte, ilike } from "drizzle-orm";
+import { and, asc, eq,  ilike } from "drizzle-orm";
 import { db } from ".";
-import { event, seat } from "./schema";
+import { event, luckyDrawWinners, reservation, seat, user } from "./schema";
 
-const today = new Date();
+// const today = new Date();
 
 export const getReservedSeatsForEvent =
   async function fetchesAllReservedSeatsForAParticularEvent({
@@ -113,3 +113,46 @@ export const getEventById = async ({ eventId }: { eventId: string }) => {
     };
   }
 };
+
+export const getReservationsForEvent = async function getReservationsForAnEventWithSpecifiedEventID({eventId, query}: {eventId: string, query: string}) {
+  try {
+    const reservations = await db.select({
+      attendeeId:user.id,
+      name:user.name,
+      email:user.email,
+      registeredAt:reservation.createdAt,
+      status:reservation.status
+    }).from(reservation).where(and(eq(reservation.eventId, eventId), ilike(user.name,query))).innerJoin(user, eq(reservation.userId, user.id));
+    return { reservations, error: null };
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : "An unknown error occured while fetching reservations")
+    return {
+      reservations: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "an unknown error occured while fetching reservations",
+    };
+  }
+}
+
+export const getLuckyDrawWinnersForEvent = async function getLuckyDrawWinnersForAnEventWithSpecifiedEventID({eventId}: {eventId: string}) {
+  try {
+    const luckyDrawWinnersData = await db.select({
+      userId:user.id,
+      name:user.name,
+      email:user.email,
+      drawAt:luckyDrawWinners.createdAt,
+    }).from(luckyDrawWinners).where(eq(luckyDrawWinners.eventId, eventId)).innerJoin(user, eq(luckyDrawWinners.userId, user.id))
+    return { luckyDrawWinnersData, error: null };
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : "An unknown error occured while fetching lucky draw winners")
+    return {
+      luckyDrawWinnersData: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "an unknown error occured while fetching lucky draw winners",
+    };
+  }
+}
