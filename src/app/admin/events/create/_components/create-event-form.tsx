@@ -79,7 +79,7 @@ export function CreateEventForm() {
           variant="ghost"
           className="text-slate-300 hover:bg-blue-900/30 hover:text-blue-400"
         >
-          <Link href="/events">
+          <Link href="/admin/events">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Events
           </Link>
