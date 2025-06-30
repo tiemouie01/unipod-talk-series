@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Home, Plus, Trophy, Users, Settings, UserPlus } from "lucide-react"
+import { Calendar, Home, Plus } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -31,26 +31,6 @@ const menuItems = [
     title: "Create Event",
     icon: Plus,
     href: "/admin/events/create",
-  },
-  {
-    title: "Lucky Draw",
-    icon: Trophy,
-    href: "/admin/lucky-draw",
-  },
-  {
-    title: "Users",
-    icon: Users,
-    href: "/admin/users",
-  },
-  {
-    title: "Sign Up Page",
-    icon: UserPlus,
-    href: "/admin/sign-up",
-  },
-  {
-    title: "Settings",
-    icon: Settings,
-    href: "/admin/settings",
   },
 ]
 
