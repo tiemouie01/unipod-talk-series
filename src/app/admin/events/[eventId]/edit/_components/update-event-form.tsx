@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-
+import {useRouter} from "next/navigation"
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,37 +22,40 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Link from "next/link";
-import { createEventSchema } from "@/validation/events";
-import type { CreateEventFormData } from "@/types/events";
+import { updateEventSchema } from "@/validation/events";
+import type { UpdateEventFormData } from "@/types/events";
 import { UploadButton } from "@/lib/uploadthing";
 import Image from "next/image";
-import { createEventAction } from "@/server/actions";
+import { updateEventAction } from "@/server/actions";
+import type { EventDetailValues } from "@/types/events";
 
 
-export function UpdateEventForm() {
+export function UpdateEventForm({values}:{values: EventDetailValues | null}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string>("");
+  const [previewUrl, setPreviewUrl] = useState<string>(values?.bannerURL ?? "");
+  const router = useRouter()
 
-  const form = useForm<CreateEventFormData>({
-    resolver: zodResolver(createEventSchema),
+  const form = useForm<UpdateEventFormData>({
+    resolver: zodResolver(updateEventSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      eventDate: "",
-      location: "",
-      totalSeats: "",
-      registrationStartDate: "",
-      registrationEndDate: "",
-      luckyDrawEnabled: false,
-      bannerURL: "",
+      id: values?.id,
+      title: values?.title,
+      description: values?.description ?? "",
+      eventDate: values?.eventDate ? new Date(values.eventDate).toISOString().slice(0, 16) : "",
+      location: values?.location ?? "",
+      totalSeats: values?.totalSeats?.toString() ?? "",
+      registrationStartDate: values?.registrationStartDate ? new Date(values.registrationStartDate).toISOString().slice(0, 16) : "",
+      registrationEndDate: values?.registrationEndDate ? new Date(values.registrationEndDate).toISOString().slice(0, 16) : "",
+      luckyDrawEnabled: values?.luckyDrawEnabled,
+      bannerURL: values?.bannerURL ?? "",
     },
   });
 
-  const onSubmit = async (data: CreateEventFormData) => {
+  const onSubmit = async (data: UpdateEventFormData) => {
     setIsSubmitting(true);
     try {
       toast.loading("Creating Event Please Wait")
-      const {eventdata, error} = await createEventAction(data)
+      const {eventdata, error} = await updateEventAction(data)
       if (error) {
         toast.dismiss()
         toast.error(error)
@@ -64,6 +67,7 @@ export function UpdateEventForm() {
       })
       form.reset();
       setPreviewUrl("")
+      router.push(`/admin/events/${eventdata?.id}`)
     } catch (error) {
       console.error("Error creating event:", error);
     } finally {
@@ -151,7 +155,7 @@ export function UpdateEventForm() {
                         <FormLabel className="text-slate-300">Date</FormLabel>
                         <FormControl>
                           <Input
-                            type="date"
+                            type="datetime-local"
                             className="border-blue-700/50 bg-slate-700 text-white focus:border-blue-500"
                             {...field}
                           />
@@ -366,7 +370,7 @@ export function UpdateEventForm() {
               disabled={isSubmitting}
               className="bg-gradient-to-r from-blue-600 to-yellow-500 shadow-lg shadow-blue-500/25 hover:from-blue-700 hover:to-yellow-600 disabled:opacity-50"
             >
-              {isSubmitting ? "Creating..." : "Create Event"}
+              {isSubmitting ? "Updating..." : "Update Event"}
             </Button>
           </div>
         </form>

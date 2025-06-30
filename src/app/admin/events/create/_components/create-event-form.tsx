@@ -151,7 +151,7 @@ export function CreateEventForm() {
                         <FormLabel className="text-slate-300">Date</FormLabel>
                         <FormControl>
                           <Input
-                            type="date"
+                            type="datetime-local"
                             className="border-blue-700/50 bg-slate-700 text-white focus:border-blue-500"
                             {...field}
                           />

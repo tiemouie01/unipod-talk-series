@@ -19,3 +19,5 @@ export const createEventSchema = z.object({
   luckyDrawEnabled: z.boolean(),
   bannerURL: z.string()
 })
+
+export const updateEventSchema =createEventSchema.extend({id:z.string().min(1, "Event id is required")})
