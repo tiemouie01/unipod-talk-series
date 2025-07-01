@@ -55,12 +55,6 @@ export function EventCard({ event }: EventCardProps) {
               <DropdownMenuItem className="text-slate-300 hover:text-white hover:bg-blue-900/30">
                 <Link href={`/admin/events/${event.id}/edit`}>Edit Event</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem className="text-slate-300 hover:text-white hover:bg-blue-900/30">
-                Export Attendees
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-red-400 hover:text-red-300 hover:bg-red-900/30">
-                Cancel Event
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
