@@ -1,4 +1,4 @@
-import { DashboardOverview } from "./_components/dashboard-overview";
+import { DashboardOverview } from "../_components/dashboard-overview";
 
 export default function AdminPage() {
   return (
