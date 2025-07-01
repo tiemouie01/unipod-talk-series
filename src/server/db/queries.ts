@@ -1,6 +1,6 @@
 "use server";
 
-import { and, asc, eq,  ilike } from "drizzle-orm";
+import { and, asc, eq,  ilike, desc } from "drizzle-orm";
 import { db } from ".";
 import { event, luckyDrawWinners, reservation, seat, user } from "./schema";
 
@@ -153,6 +153,26 @@ export const getLuckyDrawWinnersForEvent = async function getLuckyDrawWinnersFor
         error instanceof Error
           ? error.message
           : "an unknown error occured while fetching lucky draw winners",
+    };
+  }
+}
+
+export const getRecentEvents = async () => {
+  try {
+    const recentEventsId = await db.select({id:event.id}).from(event).orderBy(desc(event.createdAt)).limit(5);
+    const recentEvents = await Promise.all(recentEventsId.map(async (event) => {
+      const eventData = await getEventById({eventId: event.id})
+      return eventData.eventData
+    }))
+    return { recentEvents, error: null };
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : "An unknown error occured while fetching recent events")
+    return {
+      recentEvents: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "an unknown error occured while fetching recent events",
     };
   }
 }
