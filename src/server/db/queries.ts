@@ -1,10 +1,10 @@
 "use server";
 
-import { and, asc, eq,  ilike } from "drizzle-orm";
+import { and, asc, eq,  ilike, desc } from "drizzle-orm";
 import { db } from ".";
 import { event, luckyDrawWinners, reservation, seat, user } from "./schema";
 
-// const today = new Date();
+
 
 export const getReservedSeatsForEvent =
   async function fetchesAllReservedSeatsForAParticularEvent({
@@ -52,13 +52,16 @@ export const getAllSeatsForEvent =
     }
   };
 
-export const getEvents = async ({query}: {query?: string}) => {
+const NUMBER_OF_EVENTS = 10
+export const getEvents = async ({query, currentPage}: {query?: string, currentPage: number}) => {
   try {
     const eventsData = await db
       .select()
       .from(event)
       .where(ilike(event.title, `%${query}%`))
-      .orderBy(asc(event.eventDate));
+      .orderBy(asc(event.eventDate))
+      .limit(NUMBER_OF_EVENTS)
+      .offset((currentPage - 1) * NUMBER_OF_EVENTS);
     const formattedEventData = await Promise.all(
       eventsData.map(async (event) => {
         const [reservedSeats, allSeats] = await Promise.all([
@@ -84,6 +87,21 @@ export const getEvents = async ({query}: {query?: string}) => {
     };
   }
 };
+
+export const getTotalEventsCount = async ({query}: {query?: string}) => {
+  try {
+    const totalEventsCount = await db.$count(db.select().from(event).where(ilike(event.title, `%${query}%`)));
+    return { totalEventsCount: Math.ceil(totalEventsCount / NUMBER_OF_EVENTS), error: null };
+  } catch (error) {
+    return {
+      totalEventsCount: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "an unknown error occured while fetching total events count",
+    };
+  }
+}
 
 export const getEventById = async ({ eventId }: { eventId: string }) => {
   try {
@@ -153,6 +171,26 @@ export const getLuckyDrawWinnersForEvent = async function getLuckyDrawWinnersFor
         error instanceof Error
           ? error.message
           : "an unknown error occured while fetching lucky draw winners",
+    };
+  }
+}
+
+export const getRecentEvents = async () => {
+  try {
+    const recentEventsId = await db.select({id:event.id}).from(event).orderBy(desc(event.createdAt)).limit(5);
+    const recentEvents = await Promise.all(recentEventsId.map(async (event) => {
+      const eventData = await getEventById({eventId: event.id})
+      return eventData.eventData
+    }))
+    return { recentEvents, error: null };
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : "An unknown error occured while fetching recent events")
+    return {
+      recentEvents: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "an unknown error occured while fetching recent events",
     };
   }
 }

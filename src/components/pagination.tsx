@@ -2,9 +2,7 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
-  PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
@@ -33,6 +31,7 @@ export default function CustomPagination({
         {currentPage > 1 && (
           <PaginationPrevious
             href={createPageURL(currentPage - 1)}
+            className="border-slate-700/50 text-slate-300 hover:bg-slate-800/50 hover:border-blue-800/30 transition-colors"
           />
         )}
         {pages.map((page, index) => {
@@ -55,6 +54,7 @@ export default function CustomPagination({
         {currentPage < totalNumberOfPages && (
           <PaginationNext
             href={createPageURL(currentPage + 1)}
+            className="border-slate-700/50 text-slate-300 hover:bg-slate-800/50 hover:border-blue-800/30 transition-colors"
           />
         )}
       </PaginationContent>
@@ -74,13 +74,13 @@ function PaginationNumber({
   isActive: boolean;
 }) {
   const className = clsx(
-    "flex h-10 w-10 items-center justify-center text-sm border",
+    "flex h-10 w-10 items-center justify-center text-sm border transition-colors",
     {
       "rounded-l-md": position === "first" || position === "single",
       "rounded-r-md": position === "last" || position === "single",
-      "z-10 bg-blue-600 border-blue-600 text-white": isActive,
-      "hover:bg-gray-100": !isActive && position !== "middle",
-      "text-gray-300": position === "middle",
+      "z-10 bg-blue-600 border-blue-800/30 text-white": isActive,
+      "hover:bg-slate-800/50 hover:border-blue-800/30 border-slate-700/50 text-slate-300": !isActive && position !== "middle",
+      "text-slate-500 border-transparent": position === "middle",
     }
   );
 

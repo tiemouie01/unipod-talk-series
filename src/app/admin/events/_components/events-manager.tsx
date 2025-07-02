@@ -8,11 +8,23 @@ import { getEvents } from "@/server/db/queries"
 import type { EventManagementValues } from "@/types/events"
 import SearchInput from "@/components/search-input"
 import { ErrorUI } from "@/components/ui/error"
+import { getTotalEventsCount } from "@/server/db/queries"
+import CustomPagination from "@/components/pagination"
 
-export async function EventsManager({query}:{query:string}) {
-  const {eventsData,error} = await getEvents({query:query || ""})
-
+export async function EventsManager({query, page}:{query:string, page:number}) {
+  const {eventsData,error} = await getEvents({query:query || "", currentPage:page})
+  const {totalEventsCount,error:totalEventsCountError} = await getTotalEventsCount({query:query || ""})
   if (error) {
+    return (
+      <div className="min-h-[50vh] grid place-items-center">
+        <ErrorUI 
+          title="Failed to load events" 
+          message="There was an error loading the events. Please try refreshing the page."
+        />
+      </div>
+    )
+  }
+  if (totalEventsCountError) {
     return (
       <div className="min-h-[50vh] grid place-items-center">
         <ErrorUI 
@@ -59,6 +71,7 @@ export async function EventsManager({query}:{query:string}) {
           <p className="text-slate-400">No events found</p>
         </div>
       )}
+      <CustomPagination totalNumberOfPages={totalEventsCount ?? 0} />
     </div>
   )
 }

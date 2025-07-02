@@ -1,10 +1,9 @@
-import { CreateEventForm } from "./_components/create-event-form";
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
-import { redirect } from "next/navigation"
-import { ErrorUI } from "@/components/ui/error"
-
-export default async function CreateEventPage() {
+import { headers } from "next/headers";
+import { DashboardOverview } from "../_components/dashboard-overview";
+import {auth} from "@/lib/auth"
+import { ErrorUI } from "@/components/ui/error";
+import { redirect } from "next/navigation";
+export default async function AdminPage() {
   const userData = await auth.api.getSession({
     headers: await headers()
   })
@@ -26,8 +25,8 @@ export default async function CreateEventPage() {
     redirect("/auth")
   }
   return (
-    <div className="min-h-[calc(100vh-3rem)]">
-      <CreateEventForm />
+    <div>
+      <DashboardOverview />
     </div>
   );
 }
