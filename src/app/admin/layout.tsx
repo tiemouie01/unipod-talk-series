@@ -12,9 +12,9 @@ export default function AdminLayout({
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900">
         <SidebarProvider>
           <AppSidebar />
-          <main className="flex-1 ml-0 lg:ml-64">
+          <main className="flex-1">
             <div className="p-6">
-              <SidebarTrigger className="bg-white"/>
+          <SidebarTrigger className="bg-white"/>
               {children}
             </div>
           </main>

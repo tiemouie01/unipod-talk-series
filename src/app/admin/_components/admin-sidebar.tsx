@@ -38,8 +38,9 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="fixed left-0 top-0 h-full w-64 bg-slate-900/95 border-r border-blue-800/30 backdrop-blur-sm">
-      <Sidebar className="bg-transparent border-none">
+    
+      <Sidebar className="bg-slate-900/95 border-r border-blue-800/30 backdrop-blur-sm">
+        <SidebarContent className="p-4 space-y-6 bg-slate-900/95 backdrop-blur-lg md:bg-none">
         <SidebarHeader className="p-6 border-b border-blue-800/30 bg-slate-800/50">
           <div className="flex justify-center">
             <Link href="/" className="flex flex-col items-center gap-2">
@@ -47,10 +48,9 @@ export function AppSidebar() {
               <span className="bg-gradient-to-r from-blue-400 to-yellow-400 bg-clip-text text-xl font-extrabold text-transparent">
                 Talks Series
               </span>
-            </Link>
+              </Link>
           </div>
         </SidebarHeader>
-        <SidebarContent className="p-4 space-y-6">
           <SidebarGroup>
             <SidebarGroupLabel className="text-slate-400 text-xs uppercase tracking-wider mb-4 pl-4">
               Navigation
@@ -87,6 +87,6 @@ export function AppSidebar() {
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
-    </div>
+  
   )
 }
