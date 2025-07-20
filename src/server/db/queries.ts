@@ -2,7 +2,15 @@
 
 import { and, asc, eq, ilike, desc } from "drizzle-orm";
 import { db } from ".";
-import { event, luckyDrawWinners, reservation, seat, user } from "./schema";
+import {
+  event,
+  luckyDrawWinners,
+  reservation,
+  seat,
+  user,
+  speaker,
+  eventSpeakers,
+} from "./schema";
 
 export const getReservedSeatsForEvent =
   async function fetchesAllReservedSeatsForAParticularEvent({
@@ -270,17 +278,32 @@ export const getUpcomingEvent = async () => {
 
     const eventId = eventData.id;
 
-    // Get reserved and total seats for this specific event
-    const [eventReservedSeats, eventAllSeats] = await Promise.all([
-      getReservedSeatsForEvent({ eventId }),
-      getAllSeatsForEvent({ eventId }),
-    ]);
+    // Get reserved and total seats for this specific event, and speakers
+    const [eventReservedSeats, eventAllSeats, eventSpeakersData] =
+      await Promise.all([
+        getReservedSeatsForEvent({ eventId }),
+        getAllSeatsForEvent({ eventId }),
+        db
+          .select({
+            speakerId: speaker.id,
+            speakerName: speaker.name,
+            speakerTitle: speaker.title,
+          })
+          .from(eventSpeakers)
+          .innerJoin(speaker, eq(eventSpeakers.speakerId, speaker.id))
+          .where(eq(eventSpeakers.eventId, eventId)),
+      ]);
+
+    // Get the first speaker as the main speaker (or use fallbacks)
+    const mainSpeaker = eventSpeakersData[0];
 
     return {
       data: {
         ...eventData,
         reservedSeats: eventReservedSeats.reservedSeats?.length ?? 0,
         totalSeats: eventAllSeats.allSeats?.length ?? 0,
+        speaker: mainSpeaker?.speakerName ?? "Featured Speaker",
+        speakerTitle: mainSpeaker?.speakerTitle ?? "Expert",
       },
       error: null,
     };

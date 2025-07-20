@@ -24,6 +24,8 @@ interface Event {
   updatedAt: Date;
   reservedSeats: number;
   totalSeats: number;
+  speaker: string;
+  speakerTitle: string;
 }
 
 interface HomePageClientProps {
@@ -43,8 +45,8 @@ function transformEventToEventData(event: Event): EventData {
   return {
     id: 1, // Using a number as expected by components
     title: event.title,
-    speaker: "Featured Speaker", // Default value since not in DB
-    speakerTitle: "Expert", // Default value since not in DB
+    speaker: event.speaker,
+    speakerTitle: event.speakerTitle,
     date: dateString ?? "",
     time: timeString ?? "",
     venue: event.location ?? "Unipod Malawi",
