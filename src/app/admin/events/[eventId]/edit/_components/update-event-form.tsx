@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -29,11 +29,14 @@ import Image from "next/image";
 import { updateEventAction } from "@/server/actions";
 import type { EventDetailValues } from "@/types/events";
 
-
-export function UpdateEventForm({values}:{values: EventDetailValues | null}) {
+export function UpdateEventForm({
+  values,
+}: {
+  values: EventDetailValues | null;
+}) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string>(values?.bannerURL ?? "");
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm<UpdateEventFormData>({
     resolver: zodResolver(updateEventSchema),
@@ -41,11 +44,17 @@ export function UpdateEventForm({values}:{values: EventDetailValues | null}) {
       id: values?.id,
       title: values?.title,
       description: values?.description ?? "",
-      eventDate: values?.eventDate ? new Date(values.eventDate).toISOString().slice(0, 16) : "",
+      eventDate: values?.eventDate
+        ? new Date(values.eventDate).toISOString().slice(0, 16)
+        : "",
       location: values?.location ?? "",
       totalSeats: values?.totalSeats?.toString() ?? "",
-      registrationStartDate: values?.registrationStartDate ? new Date(values.registrationStartDate).toISOString().slice(0, 16) : "",
-      registrationEndDate: values?.registrationEndDate ? new Date(values.registrationEndDate).toISOString().slice(0, 16) : "",
+      registrationStartDate: values?.registrationStartDate
+        ? new Date(values.registrationStartDate).toISOString().slice(0, 16)
+        : "",
+      registrationEndDate: values?.registrationEndDate
+        ? new Date(values.registrationEndDate).toISOString().slice(0, 16)
+        : "",
       luckyDrawEnabled: values?.luckyDrawEnabled,
       bannerURL: values?.bannerURL ?? "",
     },
@@ -54,20 +63,20 @@ export function UpdateEventForm({values}:{values: EventDetailValues | null}) {
   const onSubmit = async (data: UpdateEventFormData) => {
     setIsSubmitting(true);
     try {
-      toast.loading("Creating Event Please Wait")
-      const {eventdata, error} = await updateEventAction(data)
+      toast.loading("Creating Event Please Wait");
+      const { eventdata, error } = await updateEventAction(data);
       if (error) {
-        toast.dismiss()
-        toast.error(error)
-        return
+        toast.dismiss();
+        toast.error(error);
+        return;
       }
-      toast.dismiss()
-      toast.success("Event Created Successfully",{
-        description:`${eventdata?.title} event was created successfully`
-      })
+      toast.dismiss();
+      toast.success("Event Created Successfully", {
+        description: `${eventdata?.title} event was created successfully`,
+      });
       form.reset();
-      setPreviewUrl("")
-      router.push(`/admin/events/${eventdata?.id}`)
+      setPreviewUrl("");
+      router.push(`/admin/events/${eventdata?.id}`);
     } catch (error) {
       console.error("Error creating event:", error);
     } finally {
@@ -226,6 +235,9 @@ export function UpdateEventForm({values}:{values: EventDetailValues | null}) {
                       <div className="space-y-4">
                         <UploadButton
                           endpoint={"imageUploader"}
+                          onUploadError={(res) => {
+                            toast.error(res.message);
+                          }}
                           onClientUploadComplete={(res) => {
                             if (res[0]?.ufsUrl) {
                               toast.success(
