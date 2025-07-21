@@ -27,9 +27,10 @@ import type { CreateEventFormData } from "@/types/events";
 import { UploadButton } from "@/lib/uploadthing";
 import Image from "next/image";
 import { createEventAction } from "@/server/actions";
-
+import { useRouter } from "next/navigation";
 
 export function CreateEventForm() {
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string>("");
 
@@ -51,19 +52,20 @@ export function CreateEventForm() {
   const onSubmit = async (data: CreateEventFormData) => {
     setIsSubmitting(true);
     try {
-      toast.loading("Creating Event Please Wait")
-      const {eventdata, error} = await createEventAction(data)
+      toast.loading("Creating Event Please Wait");
+      const { eventdata, error } = await createEventAction(data);
       if (error) {
-        toast.dismiss()
-        toast.error(error)
-        return
+        toast.dismiss();
+        toast.error(error);
+        return;
       }
-      toast.dismiss()
-      toast.success("Event Created Successfully",{
-        description:`${eventdata?.title} event was created successfully`
-      })
+      toast.dismiss();
+      toast.success("Event Created Successfully", {
+        description: `${eventdata?.title} event was created successfully`,
+      });
       form.reset();
-      setPreviewUrl("")
+      setPreviewUrl("");
+      router.push(`/admin/events/${eventdata?.id}`);
     } catch (error) {
       console.error("Error creating event:", error);
     } finally {
