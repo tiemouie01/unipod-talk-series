@@ -125,12 +125,12 @@ export function HomePageClient({ event }: HomePageClientProps) {
       <ReservationModal
         open={showReservationModal}
         onOpenChange={setShowReservationModal}
-        eventId={1} // Using number as expected by modal
+        eventId={event.id}
       />
       <LotteryModal
         open={showLotteryModal}
         onOpenChange={setShowLotteryModal}
-        eventId={1} // Using number as expected by modal
+        eventId={event.id}
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import type { CreateEventValues, UpdateEventValues } from "@/types/events";
 import { db } from ".";
-import { event, seat, eventActivityLog } from "./schema";
-import { eq } from "drizzle-orm";
+import { event, seat, eventActivityLog, reservation, user } from "./schema";
+import { and, eq } from "drizzle-orm";
 
 export const createEvent = async function (values: CreateEventValues) {
   try {
@@ -98,5 +98,103 @@ export const updateEvent = async function (values: UpdateEventValues) {
         : "an unknown error occured while updating an event",
     );
     throw new Error("An error occrued while updating an event");
+  }
+};
+
+export const createReservation = async function ({
+  userId,
+  eventId,
+  seatId,
+  isLuckyDraw = false,
+}: {
+  userId: string;
+  eventId: string;
+  seatId: string;
+  isLuckyDraw?: boolean;
+}) {
+  try {
+    // Check if reservation associated with user already exists
+    const existingReservation = await db
+      .select()
+      .from(reservation)
+      .where(
+        and(eq(reservation.userId, userId), eq(reservation.eventId, eventId)),
+      );
+    if (existingReservation && existingReservation.length > 0) {
+      return { data: null, error: "You have already reserved a seat" };
+    }
+    const result = await db.transaction(async (tx) => {
+      // Mark seat as reserved
+      await tx
+        .update(seat)
+        .set({ isReserved: true })
+        .where(eq(seat.id, seatId));
+      // Create reservation
+      const reservationData = await tx
+        .insert(reservation)
+        .values({
+          userId,
+          eventId,
+          seatId,
+          isLuckyDraw,
+          status: "active",
+        })
+        .returning();
+      return reservationData[0];
+    });
+    return {
+      data: result,
+      error: null,
+    };
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error);
+    return {
+      data: null,
+      error: "An error occurred while creating a reservation",
+    };
+  }
+};
+
+export const createUser = async function ({
+  name,
+  email,
+  phone,
+  occupation,
+}: {
+  name: string;
+  email: string;
+  phone: string;
+  occupation: string;
+}) {
+  try {
+    const userData = await db
+      .insert(user)
+      .values({
+        id: crypto.randomUUID(),
+        name,
+        email,
+        phone,
+        occupation,
+      })
+      .returning({
+        id: user.id,
+      });
+
+    if (!userData || userData.length === 0 || !userData[0]) {
+      return {
+        data: null,
+        error: "An error occurred while creating a user",
+      };
+    }
+    return {
+      data: userData[0],
+      error: null,
+    };
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error);
+    return {
+      data: null,
+      error: "An error occurred while creating a user",
+    };
   }
 };

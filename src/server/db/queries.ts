@@ -317,3 +317,64 @@ export const getUpcomingEvent = async () => {
     };
   }
 };
+
+export const getNextAvailableSeat = async ({
+  eventId,
+}: {
+  eventId: string;
+}) => {
+  try {
+    const nextAvailableSeat = await db
+      .select({ id: seat.id })
+      .from(seat)
+      .where(and(eq(seat.eventId, eventId), eq(seat.isReserved, false)))
+      .orderBy(asc(seat.seatLabel));
+
+    if (
+      !nextAvailableSeat ||
+      nextAvailableSeat.length === 0 ||
+      !nextAvailableSeat[0]
+    ) {
+      return {
+        data: null,
+        error: "No available seats found",
+      };
+    }
+
+    return { data: nextAvailableSeat[0], error: null };
+  } catch (error) {
+    return {
+      data: null,
+      error:
+        error instanceof Error
+          ? error.message
+          : "An unknown error occurred while fetching the next available seat",
+    };
+  }
+};
+
+export const getUser = async ({ email }: { email: string }) => {
+  try {
+    const userData = await db
+      .select({ id: user.id })
+      .from(user)
+      .where(eq(user.email, email));
+    if (!userData) {
+      return {
+        data: null,
+        error: "User not found, please try again",
+      };
+    }
+    return { data: userData[0], error: null };
+  } catch (error) {
+    console.error(
+      error instanceof Error
+        ? error.message
+        : "An unknown error occurred while fetching the user",
+    );
+    return {
+      data: null,
+      error: "An unknown error occurred while fetching the user",
+    };
+  }
+};
