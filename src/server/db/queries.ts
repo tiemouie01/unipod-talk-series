@@ -126,7 +126,27 @@ export const getTotalEventsCount = async ({ query }: { query?: string }) => {
 export const getEventById = async ({ eventId }: { eventId: string }) => {
   try {
     const [eventData, reservedSeats, allSeats] = await Promise.all([
-      db.select().from(event).where(eq(event.id, eventId)),
+      db
+        .select({
+          id: event.id,
+          title: event.title,
+          description: event.description,
+          location: event.location,
+          eventDate: event.eventDate,
+          registrationStartDate: event.registrationStartDate,
+          registrationEndDate: event.registrationEndDate,
+          bannerURL: event.bannerURL,
+          luckyDrawEnabled: event.luckyDrawEnabled,
+          createdBy: event.createdBy,
+          createdAt: event.createdAt,
+          updatedAt: event.updatedAt,
+          speaker: speaker.name,
+          speakerTitle: speaker.title,
+        })
+        .from(event)
+        .innerJoin(eventSpeakers, eq(event.id, eventSpeakers.eventId))
+        .innerJoin(speaker, eq(eventSpeakers.speakerId, speaker.id))
+        .where(eq(event.id, eventId)),
       getReservedSeatsForEvent({ eventId }),
       getAllSeatsForEvent({ eventId }),
     ]);
