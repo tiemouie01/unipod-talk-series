@@ -25,7 +25,7 @@ export function EventCard({ event }: EventCardProps) {
       {/* Banner Image */}
       <div className="relative h-48 w-full overflow-hidden">
         <Image
-          src={event.bannerURL ?? "/logo.png"}
+          src={event.bannerURL! || "/logo.png"}
           alt={`${event.title} banner`}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

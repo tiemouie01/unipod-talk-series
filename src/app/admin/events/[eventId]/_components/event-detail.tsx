@@ -1,11 +1,4 @@
-import {
-  ArrowLeft,
-  Calendar,
-  MapPin,
-  Users,
-  Trophy,
-  MoreHorizontal,
-} from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Users, Trophy } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +31,7 @@ export async function EventDetail({ eventId, query }: EventDetailProps) {
     await getReservationsForEvent({ eventId, query: query || "" });
   const { luckyDrawWinnersData, error: luckyDrawWinnersError } =
     await getLuckyDrawWinnersForEvent({ eventId });
+  console.log(reservations);
 
   // Calculate reservation counts
 
@@ -247,7 +241,6 @@ export async function EventDetail({ eventId, query }: EventDetailProps) {
                         Registered
                       </TableHead>
                       <TableHead className="text-slate-300">Status</TableHead>
-                      <TableHead className="text-slate-300">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -277,15 +270,6 @@ export async function EventDetail({ eventId, query }: EventDetailProps) {
                           >
                             {reservation.status}
                           </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="text-slate-400 hover:text-blue-400"
-                          >
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -373,6 +357,8 @@ export async function EventDetail({ eventId, query }: EventDetailProps) {
                 <p className="text-slate-400">
                   Analytics charts and insights coming soon...
                 </p>
+
+                
               </div>
             </CardContent>
           </Card>

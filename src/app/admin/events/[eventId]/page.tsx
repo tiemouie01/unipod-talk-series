@@ -11,6 +11,9 @@ export default async function EventDetailPage(props: {
   const userData = await auth.api.getSession({
     headers: await headers(),
   });
+ if(!userData){
+  redirect("/")
+ } 
   const userId = userData?.session.userId;
   const { success, error } = await auth.api.userHasPermission({
     body: {

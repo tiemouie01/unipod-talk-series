@@ -11,6 +11,9 @@ export default async function UpdateEventPage(props: {
   const userData = await auth.api.getSession({
     headers: await headers(),
   });
+  if (!userData) {
+    redirect("/");
+  }
 
   const userId = userData?.session.userId;
   const { success, error: permissionError } = await auth.api.userHasPermission({
