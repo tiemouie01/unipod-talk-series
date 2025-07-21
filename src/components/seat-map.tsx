@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Seat {
   id: number;
@@ -131,6 +132,35 @@ export function SeatMap({ seats }: SeatMapProps) {
           <Badge className="border border-white/20 bg-gradient-to-r from-yellow-400/80 via-yellow-500/80 to-orange-400/80 px-4 py-2 text-black shadow-lg ring-2 shadow-yellow-300/40 ring-white/30 backdrop-blur-xl">
             7 Rows
           </Badge>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function SeatMapSkeleton() {
+  return (
+    <div className="space-y-8">
+      <div className="flex flex-wrap justify-center gap-6">
+        <Skeleton className="h-8 w-40 rounded-xl" />
+        <Skeleton className="h-8 w-40 rounded-xl" />
+      </div>
+      <div className="text-center">
+        <Skeleton className="mb-8 inline-block h-12 w-64 rounded-2xl" />
+      </div>
+      <div className="space-y-3">
+        {[...Array(7).keys()].map((_, rowIdx) => (
+          <div key={rowIdx} className="flex justify-center gap-2">
+            {[...Array(10).keys()].map((_, seatIdx) => (
+              <Skeleton key={seatIdx} className="h-10 w-10 rounded-lg" />
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="space-y-4 text-center">
+        <div className="flex justify-center gap-8 text-sm">
+          <Skeleton className="h-8 w-40 rounded-xl" />
+          <Skeleton className="h-8 w-40 rounded-xl" />
         </div>
       </div>
     </div>

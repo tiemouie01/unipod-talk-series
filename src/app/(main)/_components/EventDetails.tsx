@@ -13,6 +13,7 @@ import { CountdownTimer } from "@/components/countdown-timer";
 import { LotteryWinners } from "@/components/lottery-winners";
 import React from "react";
 import type { EventData } from "./EventPoster";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function EventDetails({
   currentEvent,
@@ -128,6 +129,53 @@ export function EventDetails({
         </CardContent>
       </Card>
       {currentEvent.lotteryAssigned && <LotteryWinners />}
+    </div>
+  );
+}
+
+export function EventDetailsSkeleton() {
+  return (
+    <div className="space-y-8">
+      <div className="mb-6">
+        <Card className="overflow-hidden border border-white/10 bg-gradient-to-br from-blue-950/80 via-gray-900/70 to-black/70 shadow-2xl ring-1 ring-white/20 backdrop-blur-3xl">
+          <CardContent className="p-4">
+            <div className="flex flex-col items-center gap-2">
+              <Skeleton className="mb-2 h-7 w-40" />
+              <div className="grid w-full grid-cols-4 gap-3">
+                <Skeleton className="h-14 w-14 rounded-xl" />
+                <Skeleton className="h-14 w-14 rounded-xl" />
+                <Skeleton className="h-14 w-14 rounded-xl" />
+                <Skeleton className="h-14 w-14 rounded-xl" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+      <Card className="unipod-glow border border-white/10 bg-gradient-to-br from-blue-950/80 via-gray-900/70 to-black/70 shadow-2xl ring-1 ring-white/20 backdrop-blur-3xl">
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 gap-4">
+            {[...Array(4).keys()].map((_, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-blue-900/70 via-gray-900/60 to-black/60 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-white/20 backdrop-blur-2xl"
+              >
+                <Skeleton className="h-11 w-11 rounded-full" />
+                <div className="flex w-full flex-col gap-2">
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-3 w-24" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="border-t border-blue-900 pt-6">
+            <Skeleton className="mb-6 h-6 w-full" />
+            <div className="space-y-4">
+              <Skeleton className="h-12 w-full rounded-xl" />
+              <Skeleton className="h-12 w-full rounded-xl" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
