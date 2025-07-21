@@ -154,6 +154,7 @@ export const getEventById = async ({ eventId }: { eventId: string }) => {
     if (!eventData || !reservedSeats || !allSeats) {
       throw new Error("an unknown error occured while fetching event by id");
     }
+
     return {
       eventData: {
         ...eventData[0],
@@ -191,7 +192,9 @@ export const getReservationsForEvent =
           status: reservation.status,
         })
         .from(reservation)
-        .where(and(eq(reservation.eventId, eventId), ilike(user.name, query)))
+        .where(
+          and(eq(reservation.eventId, eventId), ilike(user.name, `%${query}%`)),
+        )
         .innerJoin(user, eq(reservation.userId, user.id));
       return { reservations, error: null };
     } catch (error) {
@@ -257,6 +260,7 @@ export const getRecentEvents = async () => {
         return eventData.eventData;
       }),
     );
+
     return { recentEvents, error: null };
   } catch (error) {
     console.error(
