@@ -88,6 +88,13 @@ export const updateEvent = async function (values: UpdateEventValues) {
           })
           .where(eq(event.id, values.id))
           .returning();
+        await tx
+          .update(speaker)
+          .set({
+            name: values.speaker,
+            title: values.speakerTitle,
+          })
+          .where(eq(speaker.id, values.speakerId));
         if (!eventData) {
           tx.rollback();
           throw new Error("An error occrued while updating an event");

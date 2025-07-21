@@ -26,6 +26,7 @@ export const createEventSchema = z.object({
   registrationEndDate: z.string().min(1, "Registration end date is required"),
   luckyDrawEnabled: z.boolean(),
   bannerURL: z.string(),
+  speakerId: z.string(),
   speaker: z.string(),
   speakerTitle: z.string(),
 });

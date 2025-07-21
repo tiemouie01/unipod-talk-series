@@ -140,6 +140,7 @@ export const getEventById = async ({ eventId }: { eventId: string }) => {
           createdBy: event.createdBy,
           createdAt: event.createdAt,
           updatedAt: event.updatedAt,
+          speakerId: speaker.id,
           speaker: speaker.name,
           speakerTitle: speaker.title,
         })
