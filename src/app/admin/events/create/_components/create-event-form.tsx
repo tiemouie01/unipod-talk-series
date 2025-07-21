@@ -46,6 +46,8 @@ export function CreateEventForm() {
       registrationEndDate: "",
       luckyDrawEnabled: false,
       bannerURL: "",
+      speaker: "",
+      speakerTitle: "",
     },
   });
 
@@ -94,6 +96,57 @@ export function CreateEventForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            {/* Speaker Information */}
+            <Card className="border-blue-800/30 bg-slate-800/50 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-white">
+                  <Users className="h-5 w-5 text-purple-400" />
+                  Speaker Information
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="speaker"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-slate-300">
+                        Speaker Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter speaker's name"
+                          className="border-blue-700/50 bg-slate-700 text-white focus:border-blue-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="speakerTitle"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-slate-300">
+                        Speaker Title
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g., CEO, Company Name"
+                          className="border-blue-700/50 bg-slate-700 text-white focus:border-blue-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+            </Card>
+
             {/* Basic Information */}
             <Card className="border-blue-800/30 bg-slate-800/50 backdrop-blur-sm">
               <CardHeader>
