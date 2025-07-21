@@ -26,7 +26,7 @@ export default async function EventDetailPage(props: {
     </div>
   }
   if(!success){
-    redirect("/auth")
+    redirect("/")
   }
   const eventId = (await props.params).eventId;
   const query = (await props.searchParams).query;

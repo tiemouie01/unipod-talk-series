@@ -25,7 +25,7 @@ export default async function EventsPage(props:{searchParams:Promise<{query?:str
     </div>
   }
   if(!success){
-    redirect("/auth")
+    redirect("/")
   }
   
   const query = (await props.searchParams).query ?? ""

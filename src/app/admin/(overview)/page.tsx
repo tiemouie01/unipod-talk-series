@@ -22,7 +22,7 @@ export default async function AdminPage() {
     </div>
   }
   if(!success){
-    redirect("/auth")
+    redirect("/")
   }
   return (
     <div>

@@ -23,7 +23,7 @@ export default async function CreateEventPage() {
     </div>
   }
   if(!success){
-    redirect("/auth")
+    redirect("/")
   }
   return (
     <div className="min-h-[calc(100vh-3rem)]">

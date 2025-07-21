@@ -32,7 +32,7 @@ export default async function UpdateEventPage(props: {
     );
   }
   if (!success) {
-    redirect("/auth");
+    redirect("/");
   }
   const eventId = (await props.params).eventId;
   const { eventData, error } = await getEventById({ eventId });
