@@ -47,6 +47,7 @@ export function CreateEventForm() {
       luckyDrawEnabled: false,
       bannerURL: "",
       speaker: "",
+      speakerId: "",
       speakerTitle: "",
     },
   });
