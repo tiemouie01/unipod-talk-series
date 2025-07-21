@@ -116,26 +116,27 @@ export function SeatMap({ seats }: SeatMapProps) {
 export function SeatMapSkeleton() {
   return (
     <div className="space-y-8">
-      <div className="flex flex-wrap justify-center gap-6">
-        <Skeleton className="h-8 w-40 rounded-xl" />
-        <Skeleton className="h-8 w-40 rounded-xl" />
+      <div className="flex flex-wrap justify-center gap-4">
+        <Skeleton className="h-8 w-40 rounded-lg bg-gray-200 dark:bg-white/10" />
+        <Skeleton className="h-8 w-40 rounded-lg bg-gray-200 dark:bg-white/10" />
       </div>
       <div className="text-center">
-        <Skeleton className="mb-8 inline-block h-12 w-64 rounded-2xl" />
+        <Skeleton className="mb-8 inline-block h-12 w-64 rounded-xl bg-gray-200 dark:bg-white/10" />
       </div>
-      <div className="space-y-3">
-        {[...Array(7).keys()].map((_, rowIdx) => (
-          <div key={rowIdx} className="flex justify-center gap-2">
-            {[...Array(10).keys()].map((_, seatIdx) => (
-              <Skeleton key={seatIdx} className="h-10 w-10 rounded-lg" />
-            ))}
-          </div>
-        ))}
-      </div>
-      <div className="space-y-4 text-center">
-        <div className="flex justify-center gap-8 text-sm">
-          <Skeleton className="h-8 w-40 rounded-xl" />
-          <Skeleton className="h-8 w-40 rounded-xl" />
+      {Array.from({ length: 7 }).map((_, rowIdx) => (
+        <div key={rowIdx} className="flex justify-center gap-1">
+          {Array.from({ length: 10 }).map((_, seatIdx) => (
+            <Skeleton
+              key={seatIdx}
+              className="h-8 w-8 rounded bg-gray-200 dark:bg-white/10"
+            />
+          ))}
+        </div>
+      ))}
+      <div className="space-y-2 text-center">
+        <div className="flex justify-center gap-4 text-xs">
+          <Skeleton className="h-8 w-40 rounded-lg bg-gray-200 dark:bg-white/10" />
+          <Skeleton className="h-8 w-40 rounded-lg bg-gray-200 dark:bg-white/10" />
         </div>
       </div>
     </div>

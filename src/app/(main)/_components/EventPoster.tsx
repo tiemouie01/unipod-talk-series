@@ -60,14 +60,14 @@ export function EventPoster({ currentEvent }: { currentEvent: EventData }) {
 
 export function EventPosterSkeleton() {
   return (
-    <div className="grid h-full w-full overflow-hidden bg-white/40 p-0 shadow-lg backdrop-blur-md">
+    <div className="grid h-full w-full overflow-hidden bg-white/40 p-0 shadow-none backdrop-blur-md dark:bg-black/60">
       <div className="grid grid-cols-1 grid-rows-1">
-        <Skeleton className="col-start-1 row-start-1 h-full w-full" />
-        <div className="z-20 col-start-1 row-start-1 flex flex-col justify-end gap-3 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 text-white">
-          <Skeleton className="mb-3 h-8 w-40" />
-          <Skeleton className="mb-3 h-10 w-64" />
-          <Skeleton className="h-6 w-32" />
-          <Skeleton className="h-4 w-24" />
+        <Skeleton className="col-start-1 row-start-1 h-full w-full bg-gray-200 dark:bg-white/10" />
+        <div className="z-20 col-start-1 row-start-1 flex flex-col justify-end gap-2 p-6 text-gray-900 dark:text-white">
+          <Skeleton className="mb-2 h-8 w-32 rounded bg-gray-200 dark:bg-white/10" />
+          <Skeleton className="mb-2 h-10 w-56 rounded bg-gray-200 dark:bg-white/10" />
+          <Skeleton className="h-6 w-28 rounded bg-gray-200 dark:bg-white/10" />
+          <Skeleton className="h-4 w-20 rounded bg-gray-200 dark:bg-white/10" />
         </div>
       </div>
     </div>
