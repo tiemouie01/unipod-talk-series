@@ -11,16 +11,14 @@ type Seat = {
 
 export function SeatMapCard({ seats }: { seats: Seat[] }) {
   return (
-    <Card className="unipod-glow mx-auto flex w-full flex-col border border-white/10 bg-gradient-to-br from-blue-950/80 via-gray-900/70 to-black/70 p-0 py-2 shadow-2xl ring-1 ring-white/20 backdrop-blur-3xl sm:p-0 md:p-2 lg:p-6">
+    <Card className="mx-auto flex w-full flex-col border border-white/10 bg-black/60 p-0 py-2 shadow-none backdrop-blur-md sm:p-0 md:p-2 lg:p-6">
       <CardHeader className="px-4 pb-2 sm:px-6 sm:pb-4">
-        <CardTitle className="flex items-center gap-3 text-xl sm:text-2xl">
-          <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-gradient-to-br from-blue-500/80 via-yellow-400/80 to-indigo-500/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30 sm:mb-0">
-            <Users className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(244,212,27,0.7)]" />
+        <CardTitle className="flex items-center gap-2 text-lg text-white">
+          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded border border-blue-400/40 bg-blue-400/10 sm:mb-0">
+            <Users className="h-4 w-4 text-blue-200" />
           </div>
-          <span className="gradient-text text-white drop-shadow-[0_1px_8px_rgba(29,158,217,0.7)]">
-            Live Seat Map
-          </span>
-          <Badge className="ml-0 animate-pulse border border-white/20 bg-gradient-to-br from-blue-500/80 via-indigo-500/80 to-blue-400/80 text-white shadow-lg ring-2 shadow-blue-400/40 ring-white/30 sm:ml-2">
+          <span className="font-semibold text-white/90">Live Seat Map</span>
+          <Badge className="ml-0 border border-blue-400/40 bg-black/60 text-blue-200 sm:ml-2">
             Real-time Updates
           </Badge>
         </CardTitle>

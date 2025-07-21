@@ -35,82 +35,80 @@ export function EventDetails({
           targetDate={new Date(currentEvent.date + "T" + currentEvent.time)}
         />
       </div>
-      <Card className="unipod-glow border border-white/10 bg-gradient-to-br from-blue-950/80 via-gray-900/70 to-black/70 shadow-2xl ring-1 ring-white/20 backdrop-blur-3xl">
+      <Card className="border border-white/10 bg-black/60 shadow-none backdrop-blur-md">
         <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-3 text-2xl">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-gradient-to-br from-blue-500/80 via-yellow-400/80 to-indigo-500/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
-              <Calendar className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(244,212,27,0.7)]" />
+          <CardTitle className="flex items-center gap-2 text-xl text-white/90">
+            <div className="flex h-8 w-8 items-center justify-center rounded border border-blue-400/40 bg-blue-400/10">
+              <Calendar className="h-4 w-4 text-blue-200" />
             </div>
-            <span className="gradient-text text-white drop-shadow-[0_1px_8px_rgba(29,158,217,0.7)]">
-              Event Details
-            </span>
+            <span className="font-semibold text-white/90">Event Details</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 gap-4">
-            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-blue-900/70 via-gray-900/60 to-black/60 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-white/20 backdrop-blur-2xl">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-blue-500/80 via-yellow-400/80 to-indigo-500/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
-                <Clock className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(244,212,27,0.7)]" />
+          <div className="grid grid-cols-1 gap-3">
+            <div className="flex items-center gap-3 rounded border border-white/10 bg-black/60 p-3 backdrop-blur-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded border border-blue-400/40 bg-blue-400/10">
+                <Clock className="h-4 w-4 text-blue-200" />
               </div>
               <div>
-                <p className="font-semibold text-white">Date & Time</p>
-                <p className="text-blue-200">
+                <p className="font-medium text-white/80">Date & Time</p>
+                <p className="text-sm text-blue-200">
                   {new Date(currentEvent.date).toLocaleDateString()} at{" "}
                   {currentEvent.time}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-blue-900/70 via-gray-900/60 to-black/60 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-white/20 backdrop-blur-2xl">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-blue-500/80 via-blue-400/80 to-indigo-400/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
-                <MapPin className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(29,158,217,0.7)]" />
+            <div className="flex items-center gap-3 rounded border border-white/10 bg-black/60 p-3 backdrop-blur-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded border border-blue-400/40 bg-blue-400/10">
+                <MapPin className="h-4 w-4 text-blue-200" />
               </div>
               <div>
-                <p className="font-semibold text-white">Venue</p>
-                <p className="text-blue-200">{currentEvent.venue}</p>
+                <p className="font-medium text-white/80">Venue</p>
+                <p className="text-sm text-blue-200">{currentEvent.venue}</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-yellow-400/20 via-yellow-500/10 to-blue-900/40 p-4 shadow-xl ring-1 shadow-yellow-300/30 ring-white/20 backdrop-blur-2xl">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-yellow-400/80 via-yellow-500/80 to-orange-400/80 shadow-lg ring-2 shadow-yellow-300/40 ring-white/30">
-                <Users className="h-5 w-5 text-black drop-shadow-[0_1px_4px_rgba(244,212,27,0.7)]" />
+            <div className="flex items-center gap-3 rounded border border-white/10 bg-black/60 p-3 backdrop-blur-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded border border-yellow-300/40 bg-yellow-300/10">
+                <Users className="h-4 w-4 text-yellow-200" />
               </div>
               <div>
-                <p className="font-semibold text-yellow-200">Availability</p>
-                <p className="text-yellow-100">
+                <p className="font-medium text-yellow-100">Availability</p>
+                <p className="text-sm text-yellow-100">
                   {availableSeats > 0
                     ? `${availableSeats} seats remaining`
                     : "Event full - Lottery only"}
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-blue-900/70 via-gray-900/60 to-black/60 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-white/20 backdrop-blur-2xl">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-blue-500/80 via-blue-400/80 to-indigo-400/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
-                <Ticket className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(29,158,217,0.7)]" />
+            <div className="flex items-center gap-3 rounded border border-white/10 bg-black/60 p-3 backdrop-blur-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded border border-blue-400/40 bg-blue-400/10">
+                <Ticket className="h-4 w-4 text-blue-200" />
               </div>
               <div>
-                <p className="font-semibold text-white">Capacity</p>
-                <p className="text-blue-200">
+                <p className="font-medium text-white/80">Capacity</p>
+                <p className="text-sm text-blue-200">
                   {currentEvent.totalSeats} total seats
                 </p>
               </div>
             </div>
           </div>
-          <div className="border-t border-blue-900 pt-6">
-            <p className="mb-6 text-lg leading-relaxed text-blue-100">
+          <div className="border-t border-white/10 pt-6">
+            <p className="mb-6 text-base leading-relaxed text-white/80">
               {currentEvent.description}
             </p>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {availableSeats > 0 ? (
                 <Button
                   onClick={() => setShowReservationModal(true)}
-                  className="w-full transform rounded-xl border border-white/20 bg-gradient-to-br from-blue-500/80 via-indigo-500/80 to-blue-400/80 py-4 text-lg font-bold text-white shadow-xl ring-2 shadow-blue-400/40 ring-white/30 transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-500 hover:shadow-2xl"
+                  className="w-full rounded border border-blue-400/40 bg-black/60 py-3 text-base font-semibold text-blue-200 hover:bg-blue-900/30 hover:text-blue-100"
                 >
-                  <Sparkles className="mr-2 h-5 w-5" />
+                  <Sparkles className="mr-2 h-4 w-4" />
                   Reserve Your Seat Now!
                 </Button>
               ) : (
                 <Button
                   disabled
-                  className="w-full rounded-xl border border-white/20 bg-gradient-to-br from-blue-500/80 via-indigo-500/80 to-blue-400/80 py-4 text-lg text-white opacity-50 ring-2 ring-white/30"
+                  className="w-full rounded border border-white/10 bg-black/60 py-3 text-base text-white/50 opacity-60"
                 >
                   Regular Seats Full
                 </Button>
@@ -118,9 +116,9 @@ export function EventDetails({
               {canReserveLottery && (
                 <Button
                   onClick={() => setShowLotteryModal(true)}
-                  className="w-full transform rounded-xl border border-white/20 bg-gradient-to-br from-yellow-400/80 via-yellow-500/80 to-orange-400/80 py-4 text-lg font-bold text-black shadow-xl ring-2 shadow-yellow-300/40 ring-white/30 transition-all duration-300 hover:scale-105 hover:from-yellow-500 hover:to-yellow-400 hover:shadow-2xl"
+                  className="w-full rounded border border-yellow-300/40 bg-black/60 py-3 text-base font-semibold text-yellow-200 hover:bg-yellow-900/30 hover:text-yellow-100"
                 >
-                  <Zap className="mr-2 h-5 w-5" />
+                  <Zap className="mr-2 h-4 w-4" />
                   Enter Lottery (Last 6 Seats)
                 </Button>
               )}

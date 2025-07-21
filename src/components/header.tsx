@@ -4,7 +4,7 @@ import { Home } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="fixed top-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 rounded-full border border-white/30 bg-black/40 px-6 py-3 shadow-2xl backdrop-blur-md">
+    <header className="fixed top-6 left-1/2 z-50 w-full max-w-3xl -translate-x-1/2 rounded-full border border-white/15 bg-black/70 px-6 py-3 shadow-none backdrop-blur-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-3">
@@ -13,8 +13,10 @@ export function Header() {
                 <Image src="/logo.png" alt="UniPod" width={80} height={80} />
               </div>
               <div className="flex items-end">
-                <span className="text-2xl font-bold text-yellow-400">Talk</span>{" "}
-                <span className="text-2xl font-bold text-[#1d9ed9]">
+                <span className="text-2xl font-bold text-yellow-300 drop-shadow-sm">
+                  Talk
+                </span>{" "}
+                <span className="text-2xl font-bold text-blue-300 drop-shadow-sm">
                   Series
                 </span>
               </div>
@@ -24,7 +26,7 @@ export function Header() {
         <nav className="flex space-x-8">
           <Link
             href="/"
-            className="text-lg font-semibold text-[#1d9ed9] transition-colors"
+            className="text-lg font-semibold text-blue-300 transition-colors hover:text-yellow-300"
           >
             <Home className="h-6 w-6" />
           </Link>

@@ -14,20 +14,20 @@ interface SeatMapProps {
 }
 
 export function SeatMap({ seats }: SeatMapProps) {
-  const getSeatColor = (status: Seat["status"]) => {
-    switch (status) {
-      case "available":
-        return "seat-available";
-      case "reserved":
-        return "seat-reserved";
-      case "lottery":
-        return "seat-lottery";
-      case "lottery-winner":
-        return "seat-lottery-winner";
-      default:
-        return "seat-available";
-    }
-  };
+  // const getSeatColor = (status: Seat["status"]) => {
+  //   switch (status) {
+  //     case "available":
+  //       return "seat-available";
+  //     case "reserved":
+  //       return "seat-reserved";
+  //     case "lottery":
+  //       return "seat-lottery";
+  //     case "lottery-winner":
+  //       return "seat-lottery-winner";
+  //     default:
+  //       return "seat-available";
+  //   }
+  // };
 
   // Arrange seats in rows (7 rows of 10 seats each)
   const rows = [];
@@ -42,78 +42,53 @@ export function SeatMap({ seats }: SeatMapProps) {
 
   return (
     <div className="space-y-8">
-      {/* Enhanced Legend */}
-      <div className="flex flex-wrap justify-center gap-6">
-        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-gradient-to-r from-green-300/70 via-green-200/60 to-green-100/60 px-4 py-2 shadow-lg ring-2 shadow-green-400/30 ring-white/20 backdrop-blur-2xl">
-          <div className="seat-available h-6 w-6 rounded-lg border border-white/20 shadow-lg ring-2 shadow-green-400/40 ring-white/30"></div>
-          <span className="font-semibold text-green-900 drop-shadow-[0_1px_4px_rgba(34,197,94,0.5)]">
+      {/* Minimalist Legend */}
+      <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/60 px-3 py-1 backdrop-blur-md">
+          <div className="seat-available h-5 w-5 rounded border border-green-400/60 bg-green-400/10" />
+          <span className="text-sm font-medium text-green-200">
             Available ({getStatusCount("available")})
           </span>
         </div>
-        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-gradient-to-r from-red-300/70 via-red-200/60 to-red-100/60 px-4 py-2 shadow-lg ring-2 shadow-red-400/30 ring-white/20 backdrop-blur-2xl">
-          <div className="seat-reserved h-6 w-6 rounded-lg border border-white/20 shadow-lg ring-2 shadow-red-400/40 ring-white/30"></div>
-          <span className="font-semibold text-red-900 drop-shadow-[0_1px_4px_rgba(239,68,68,0.5)]">
+        <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/60 px-3 py-1 backdrop-blur-md">
+          <div className="seat-reserved h-5 w-5 rounded border border-red-400/60 bg-red-400/10" />
+          <span className="text-sm font-medium text-red-200">
             Reserved ({getStatusCount("reserved")})
           </span>
         </div>
-        {/*
-        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-yellow-200/60 via-yellow-100/40 to-yellow-50/30 px-4 py-2 shadow-lg shadow-yellow-300/30 ring-2 ring-white/20 border border-white/10 backdrop-blur-2xl">
-          <div className="seat-lottery h-6 w-6 rounded-lg shadow-lg shadow-yellow-300/40 ring-2 ring-white/30 border border-white/20"></div>
-          <span className="font-semibold text-yellow-900 drop-shadow-[0_1px_4px_rgba(244,212,27,0.5)]">Lottery ({getStatusCount("lottery")})</span>
-        </div>
-        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-blue-200/60 via-blue-100/40 to-blue-50/30 px-4 py-2 shadow-lg shadow-blue-300/30 ring-2 ring-white/20 border border-white/10 backdrop-blur-2xl">
-          <div className="seat-lottery-winner h-6 w-6 rounded-lg shadow-lg shadow-blue-300/40 ring-2 ring-white/30 border border-white/20"></div>
-          <span className="font-semibold text-blue-900 drop-shadow-[0_1px_4px_rgba(29,158,217,0.5)]">Winners ({getStatusCount("lottery-winner")})</span>
-        </div>
-        */}
       </div>
 
       {/* Stage */}
       <div className="text-center">
-        <div className="mb-8 inline-block rounded-2xl border border-white/10 bg-gradient-to-r from-blue-700/80 via-indigo-700/70 to-yellow-400/70 px-12 py-4 text-white shadow-2xl ring-2 shadow-yellow-300/30 ring-white/20 backdrop-blur-3xl">
-          <div className="flex items-center gap-3">
-            <div className="h-3 w-3 animate-pulse rounded-full bg-yellow-400 shadow-md shadow-yellow-300/60"></div>
-            <span className="text-xl font-bold tracking-wide drop-shadow-[0_1px_8px_rgba(244,212,27,0.7)]">
-              STAGE
-            </span>
-            <div className="h-3 w-3 animate-pulse rounded-full bg-yellow-400 shadow-md shadow-yellow-300/60"></div>
-          </div>
+        <div className="mb-8 inline-block rounded-xl border border-white/10 bg-black/60 px-10 py-3 text-white backdrop-blur-md">
+          <span className="text-base font-semibold tracking-wide text-yellow-200">
+            STAGE
+          </span>
         </div>
       </div>
 
-      {/* Seat Grid - Removed row numbers */}
-      <div className="space-y-3">
+      {/* Seat Grid */}
+      <div className="space-y-2">
         {rows.map((row, rowIndex) => (
-          <div key={rowIndex} className="flex justify-center gap-2">
+          <div key={rowIndex} className="flex justify-center gap-1">
             {row.map((seat) => (
               <div
                 key={seat.id}
                 className={cn(
-                  "seat flex h-10 w-10 cursor-pointer items-center justify-center border border-white/10 text-xs font-bold shadow-xl ring-2 backdrop-blur-xl",
-                  getSeatColor(seat.status),
+                  "seat flex h-8 w-8 items-center justify-center rounded border text-xs font-semibold transition-colors duration-150",
+                  seat.status === "available"
+                    ? "border-green-400/60 bg-green-400/10 text-green-100"
+                    : seat.status === "reserved"
+                      ? "border-red-400/60 bg-red-400/10 text-red-100"
+                      : seat.status === "lottery"
+                        ? "border-yellow-300/60 bg-yellow-300/10 text-yellow-100"
+                        : seat.status === "lottery-winner"
+                          ? "border-blue-400/60 bg-blue-400/10 text-blue-100"
+                          : "border-white/10 bg-white/5 text-white/80",
                 )}
                 title={`Seat ${seat.id} - ${seat.status}`}
                 style={{
-                  boxShadow:
-                    seat.status === "available"
-                      ? "0 0 12px 2px rgba(34,197,94,0.4)"
-                      : seat.status === "reserved"
-                        ? "0 0 12px 2px rgba(239,68,68,0.4)"
-                        : seat.status === "lottery"
-                          ? "0 0 12px 2px rgba(244,212,27,0.4)"
-                          : seat.status === "lottery-winner"
-                            ? "0 0 12px 2px rgba(29,158,217,0.4)"
-                            : undefined,
-                  borderColor:
-                    seat.status === "available"
-                      ? "#4ade80"
-                      : seat.status === "reserved"
-                        ? "#f87171"
-                        : seat.status === "lottery"
-                          ? "#fde047"
-                          : seat.status === "lottery-winner"
-                            ? "#38bdf8"
-                            : undefined,
+                  boxShadow: "none",
                 }}
               >
                 {seat.id}
@@ -123,13 +98,13 @@ export function SeatMap({ seats }: SeatMapProps) {
         ))}
       </div>
 
-      {/* Enhanced Info */}
-      <div className="space-y-4 text-center">
-        <div className="flex justify-center gap-8 text-sm">
-          <Badge className="border border-white/20 bg-gradient-to-r from-blue-500/80 via-indigo-500/80 to-blue-400/80 px-4 py-2 text-white shadow-lg ring-2 shadow-blue-400/40 ring-white/30 backdrop-blur-xl">
+      {/* Minimalist Info */}
+      <div className="space-y-2 text-center">
+        <div className="flex justify-center gap-4 text-xs">
+          <Badge className="border border-white/10 bg-black/60 px-3 py-1 font-normal text-white/80 backdrop-blur-md">
             Total Capacity: 70 seats
           </Badge>
-          <Badge className="border border-white/20 bg-gradient-to-r from-yellow-400/80 via-yellow-500/80 to-orange-400/80 px-4 py-2 text-black shadow-lg ring-2 shadow-yellow-300/40 ring-white/30 backdrop-blur-xl">
+          <Badge className="border border-white/10 bg-black/60 px-3 py-1 font-normal text-white/80 backdrop-blur-md">
             7 Rows
           </Badge>
         </div>
