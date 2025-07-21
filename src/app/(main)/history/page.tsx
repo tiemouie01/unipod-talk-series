@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Users, Play } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 
 // Mock historical events data
@@ -105,7 +106,7 @@ export default function HistoryPage() {
                 className="overflow-hidden transition-shadow hover:shadow-lg"
               >
                 <div className="flex aspect-3/4 flex-col justify-end">
-                  <img
+                  <Image
                     src={event.poster || "/placeholder.svg"}
                     alt={event.title}
                     className="h-full w-full object-cover"

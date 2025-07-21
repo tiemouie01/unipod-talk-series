@@ -34,6 +34,7 @@ export function LotteryModal({
   onOpenChange,
   eventId,
 }: LotteryModalProps) {
+  console.log("eventId", eventId);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -65,6 +66,7 @@ export function LotteryModal({
         gender: "",
       });
     } catch (error) {
+      console.error(error);
       toast.error("Submission Failed", {
         description: "Please try again later.",
       });

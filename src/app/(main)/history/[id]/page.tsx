@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Users, Play, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 // Mock event detail data
 type EventDetail = {
@@ -151,7 +152,7 @@ export default function EventDetailPage() {
             <div>
               <Card className="overflow-hidden">
                 <div className="flex aspect-3/4 flex-col justify-end">
-                  <img
+                  <Image
                     src={event.poster || "/placeholder.svg"}
                     alt={event.title}
                     className="h-full w-full object-cover"
@@ -173,7 +174,7 @@ export default function EventDetailPage() {
                     key={index}
                     className="flex aspect-4/3 flex-col justify-end overflow-hidden rounded-lg"
                   >
-                    <img
+                    <Image
                       src={photo || "/placeholder.svg"}
                       alt={`Event photo ${index + 1}`}
                       className="h-full w-full cursor-pointer object-cover transition-transform hover:scale-105"
