@@ -19,7 +19,7 @@ export function SignUpForm({ onBack }: SignUpFormProps) {
     // Simulate Google sign-in process
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/events",
+      callbackURL: "/",
     });
     setIsLoading(false);
     // Handle successful sign-in
