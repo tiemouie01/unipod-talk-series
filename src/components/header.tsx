@@ -28,18 +28,6 @@ export function Header() {
           >
             <Home className="h-6 w-6" />
           </Link>
-          {/* <Link
-            href="/history"
-            className="text-lg font-semibold text-gray-600 transition-colors hover:text-[#1d9ed9]"
-          >
-            Past Events
-          </Link>
-          <Link
-            href="/admin"
-            className="text-lg font-semibold text-gray-600 transition-colors hover:text-[#1d9ed9]"
-          >
-            Admin
-          </Link> */}
         </nav>
       </div>
     </header>

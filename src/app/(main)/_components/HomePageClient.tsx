@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { ReservationModal } from "@/components/reservation-modal";
 import { LotteryModal } from "@/components/lottery-modal";
-import { BackgroundImage } from "./BackgroundImage";
+// import { BackgroundImage } from "./BackgroundImage";
 import { EventPoster } from "./EventPoster";
 import { EventDetails } from "./EventDetails";
 import { SeatMapCard } from "./SeatMapCard";
@@ -104,7 +104,7 @@ export function HomePageClient({ event }: HomePageClientProps) {
       className="grid min-h-screen w-full"
       style={{ gridTemplateRows: "1fr" }}
     >
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       <main className="flex w-full flex-1 flex-col items-center px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid w-full max-w-7xl gap-12">
           <div className="mb-12 grid grid-cols-1 gap-12 xl:grid-cols-2">
