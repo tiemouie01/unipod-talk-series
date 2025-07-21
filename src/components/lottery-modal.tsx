@@ -26,7 +26,7 @@ import { toast } from "sonner";
 interface LotteryModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  eventId: number;
+  eventId: string;
 }
 
 export function LotteryModal({
