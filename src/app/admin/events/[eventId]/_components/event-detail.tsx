@@ -100,6 +100,28 @@ export async function EventDetail({ eventId, query }: EventDetailProps) {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
+              {(eventData?.speaker ?? eventData?.speakerTitle) && (
+                <div className="mb-4 rounded-lg bg-slate-700/50 p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-900/50 text-blue-300">
+                      <Users className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-wrap items-baseline gap-2">
+                      <span className="text-sm font-medium text-slate-300">
+                        Speaker:
+                      </span>
+                      {eventData.speakerTitle && (
+                        <span className="text-sm text-slate-400">
+                          {eventData.speakerTitle}
+                        </span>
+                      )}
+                      <span className="font-medium text-white">
+                        {eventData.speaker}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center gap-2 text-slate-300">
                   <Calendar className="h-4 w-4 text-blue-400" />

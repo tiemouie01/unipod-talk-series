@@ -57,13 +57,16 @@ export function UpdateEventForm({
         : "",
       luckyDrawEnabled: values?.luckyDrawEnabled,
       bannerURL: values?.bannerURL ?? "",
+      speakerId: values?.speakerId ?? "",
+      speaker: values?.speaker ?? "",
+      speakerTitle: values?.speakerTitle ?? "",
     },
   });
 
   const onSubmit = async (data: UpdateEventFormData) => {
     setIsSubmitting(true);
     try {
-      toast.loading("Creating Event Please Wait");
+      toast.loading("Updating Event Please Wait");
       const { eventdata, error } = await updateEventAction(data);
       if (error) {
         toast.dismiss();
@@ -71,14 +74,14 @@ export function UpdateEventForm({
         return;
       }
       toast.dismiss();
-      toast.success("Event Created Successfully", {
-        description: `${eventdata?.title} event was created successfully`,
+      toast.success("Event Updated Successfully", {
+        description: `${eventdata?.title} event was updated successfully`,
       });
       form.reset();
       setPreviewUrl("");
       router.push(`/admin/events/${eventdata?.id}`);
     } catch (error) {
-      console.error("Error creating event:", error);
+      console.error("Error updating event:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -261,6 +264,57 @@ export function UpdateEventForm({
                         )}
                         <FormMessage />
                       </div>
+                    </FormItem>
+                  )}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Speaker Information */}
+            <Card className="border-blue-800/30 bg-slate-800/50 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-white">
+                  <Users className="h-5 w-5 text-purple-400" />
+                  Speaker Information
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <FormField
+                  control={form.control}
+                  name="speaker"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-slate-300">
+                        Speaker Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter speaker's name"
+                          className="border-blue-700/50 bg-slate-700 text-white focus:border-blue-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="speakerTitle"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-slate-300">
+                        Speaker Title
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="e.g., CEO, Company Name"
+                          className="border-blue-700/50 bg-slate-700 text-white focus:border-blue-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
                     </FormItem>
                   )}
                 />
