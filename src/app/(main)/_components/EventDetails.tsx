@@ -34,10 +34,10 @@ export function EventDetails({
           targetDate={new Date(currentEvent.date + "T" + currentEvent.time)}
         />
       </div>
-      <Card className="unipod-glow border-none bg-gradient-to-br from-blue-950 via-gray-900 to-black/90 shadow-2xl backdrop-blur-xl">
+      <Card className="unipod-glow border border-white/10 bg-gradient-to-br from-blue-950/80 via-gray-900/70 to-black/70 shadow-2xl ring-1 ring-white/20 backdrop-blur-3xl">
         <CardHeader className="pb-4">
           <CardTitle className="flex items-center gap-3 text-2xl">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 via-yellow-400 to-indigo-500 shadow-lg ring-2 shadow-blue-400/40 ring-yellow-300/60">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/20 bg-gradient-to-br from-blue-500/80 via-yellow-400/80 to-indigo-500/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
               <Calendar className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(244,212,27,0.7)]" />
             </div>
             <span className="gradient-text text-white drop-shadow-[0_1px_8px_rgba(29,158,217,0.7)]">
@@ -47,8 +47,8 @@ export function EventDetails({
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 gap-4">
-            <div className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-blue-900/80 via-gray-900/80 to-black/80 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-blue-400/30 backdrop-blur-lg">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-yellow-400 to-indigo-500 shadow-lg ring-2 shadow-blue-400/40 ring-yellow-300/60">
+            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-blue-900/70 via-gray-900/60 to-black/60 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-white/20 backdrop-blur-2xl">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-blue-500/80 via-yellow-400/80 to-indigo-500/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
                 <Clock className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(244,212,27,0.7)]" />
               </div>
               <div>
@@ -59,8 +59,8 @@ export function EventDetails({
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-blue-900/80 via-gray-900/80 to-black/80 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-blue-400/30 backdrop-blur-lg">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-blue-400 to-indigo-400 shadow-lg ring-2 shadow-blue-400/40 ring-blue-400/60">
+            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-blue-900/70 via-gray-900/60 to-black/60 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-white/20 backdrop-blur-2xl">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-blue-500/80 via-blue-400/80 to-indigo-400/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
                 <MapPin className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(29,158,217,0.7)]" />
               </div>
               <div>
@@ -68,8 +68,8 @@ export function EventDetails({
                 <p className="text-blue-200">{currentEvent.venue}</p>
               </div>
             </div>
-            <div className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-yellow-400/30 via-yellow-500/20 to-blue-900/60 p-4 shadow-xl ring-1 shadow-yellow-300/30 ring-yellow-300/30 backdrop-blur-lg">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-400 shadow-lg ring-2 shadow-yellow-300/40 ring-yellow-300/60">
+            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-yellow-400/20 via-yellow-500/10 to-blue-900/40 p-4 shadow-xl ring-1 shadow-yellow-300/30 ring-white/20 backdrop-blur-2xl">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-yellow-400/80 via-yellow-500/80 to-orange-400/80 shadow-lg ring-2 shadow-yellow-300/40 ring-white/30">
                 <Users className="h-5 w-5 text-black drop-shadow-[0_1px_4px_rgba(244,212,27,0.7)]" />
               </div>
               <div>
@@ -81,8 +81,8 @@ export function EventDetails({
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-4 rounded-xl bg-gradient-to-br from-blue-900/80 via-gray-900/80 to-black/80 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-blue-400/30 backdrop-blur-lg">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-blue-400 to-indigo-400 shadow-lg ring-2 shadow-blue-400/40 ring-blue-400/60">
+            <div className="flex items-center gap-4 rounded-xl border border-white/10 bg-gradient-to-br from-blue-900/70 via-gray-900/60 to-black/60 p-4 shadow-xl ring-1 shadow-blue-400/30 ring-white/20 backdrop-blur-2xl">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-gradient-to-br from-blue-500/80 via-blue-400/80 to-indigo-400/80 shadow-lg ring-2 shadow-blue-400/40 ring-white/30">
                 <Ticket className="h-5 w-5 text-white drop-shadow-[0_1px_4px_rgba(29,158,217,0.7)]" />
               </div>
               <div>
@@ -101,7 +101,7 @@ export function EventDetails({
               {availableSeats > 0 ? (
                 <Button
                   onClick={() => setShowReservationModal(true)}
-                  className="w-full transform rounded-xl bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-400 py-4 text-lg font-bold text-white shadow-xl shadow-blue-400/40 transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-500 hover:shadow-2xl"
+                  className="w-full transform rounded-xl border border-white/20 bg-gradient-to-br from-blue-500/80 via-indigo-500/80 to-blue-400/80 py-4 text-lg font-bold text-white shadow-xl ring-2 shadow-blue-400/40 ring-white/30 transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-blue-500 hover:shadow-2xl"
                 >
                   <Sparkles className="mr-2 h-5 w-5" />
                   Reserve Your Seat Now!
@@ -109,7 +109,7 @@ export function EventDetails({
               ) : (
                 <Button
                   disabled
-                  className="w-full rounded-xl bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-400 py-4 text-lg text-white opacity-50"
+                  className="w-full rounded-xl border border-white/20 bg-gradient-to-br from-blue-500/80 via-indigo-500/80 to-blue-400/80 py-4 text-lg text-white opacity-50 ring-2 ring-white/30"
                 >
                   Regular Seats Full
                 </Button>
@@ -117,7 +117,7 @@ export function EventDetails({
               {canReserveLottery && (
                 <Button
                   onClick={() => setShowLotteryModal(true)}
-                  className="w-full transform rounded-xl bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-400 py-4 text-lg font-bold text-black shadow-xl shadow-yellow-300/40 transition-all duration-300 hover:scale-105 hover:from-yellow-500 hover:to-yellow-400 hover:shadow-2xl"
+                  className="w-full transform rounded-xl border border-white/20 bg-gradient-to-br from-yellow-400/80 via-yellow-500/80 to-orange-400/80 py-4 text-lg font-bold text-black shadow-xl ring-2 shadow-yellow-300/40 ring-white/30 transition-all duration-300 hover:scale-105 hover:from-yellow-500 hover:to-yellow-400 hover:shadow-2xl"
                 >
                   <Zap className="mr-2 h-5 w-5" />
                   Enter Lottery (Last 6 Seats)

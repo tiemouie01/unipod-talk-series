@@ -83,9 +83,13 @@ export function ReservationModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="border border-white/10 bg-gradient-to-br from-blue-950/80 via-gray-900/70 to-black/70 shadow-2xl ring-1 ring-white/20 backdrop-blur-3xl sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Reserve Your Seat</DialogTitle>
+          <DialogTitle>
+            <span className="gradient-text text-white drop-shadow-[0_1px_8px_rgba(29,158,217,0.7)]">
+              Reserve Your Seat
+            </span>
+          </DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -94,9 +98,13 @@ export function ReservationModal({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel className="text-white">Full Name</FormLabel>
                   <FormControl>
-                    <Input id="name" {...field} />
+                    <Input
+                      id="name"
+                      {...field}
+                      className="border border-white/10 bg-white/10 text-white backdrop-blur-xl placeholder:text-gray-400 focus:border-blue-400/70 focus:ring-2 focus:ring-blue-400/70"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -107,9 +115,14 @@ export function ReservationModal({
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address</FormLabel>
+                  <FormLabel className="text-white">Email Address</FormLabel>
                   <FormControl>
-                    <Input id="email" type="email" {...field} />
+                    <Input
+                      id="email"
+                      type="email"
+                      {...field}
+                      className="border border-white/10 bg-white/10 text-white backdrop-blur-xl placeholder:text-gray-400 focus:border-blue-400/70 focus:ring-2 focus:ring-blue-400/70"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,9 +133,13 @@ export function ReservationModal({
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel className="text-white">Phone Number</FormLabel>
                   <FormControl>
-                    <Input id="phone" {...field} />
+                    <Input
+                      id="phone"
+                      {...field}
+                      className="border border-white/10 bg-white/10 text-white backdrop-blur-xl placeholder:text-gray-400 focus:border-yellow-400/70 focus:ring-2 focus:ring-yellow-400/70"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,9 +150,13 @@ export function ReservationModal({
               name="occupation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Occupation</FormLabel>
+                  <FormLabel className="text-white">Occupation</FormLabel>
                   <FormControl>
-                    <Input id="occupation" {...field} />
+                    <Input
+                      id="occupation"
+                      {...field}
+                      className="border border-white/10 bg-white/10 text-white backdrop-blur-xl placeholder:text-gray-400 focus:border-yellow-400/70 focus:ring-2 focus:ring-yellow-400/70"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -146,14 +167,14 @@ export function ReservationModal({
                 type="button"
                 variant="outline"
                 onClick={() => onOpenChange(false)}
-                className="flex-1"
+                className="flex-1 border border-white/10 bg-white/10 text-white backdrop-blur-xl hover:bg-white/20"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-orange-600 hover:bg-orange-700"
+                className="flex-1 border border-white/20 bg-gradient-to-br from-blue-500/80 via-yellow-400/80 to-indigo-500/80 font-bold text-white shadow-lg ring-2 shadow-blue-400/40 ring-white/30 transition-all hover:from-blue-700 hover:to-yellow-500 hover:shadow-2xl"
               >
                 {isSubmitting ? "Reserving..." : "Reserve Seat"}
               </Button>

@@ -43,25 +43,25 @@ export function SeatMap({ seats }: SeatMapProps) {
     <div className="space-y-8">
       {/* Enhanced Legend */}
       <div className="flex flex-wrap justify-center gap-6">
-        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-green-300 via-green-200 to-green-100 px-4 py-2 shadow-lg ring-2 shadow-green-400/30 ring-green-300/30">
-          <div className="seat-available h-6 w-6 rounded-lg shadow-lg ring-2 shadow-green-400/40 ring-green-300/60"></div>
+        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-gradient-to-r from-green-300/70 via-green-200/60 to-green-100/60 px-4 py-2 shadow-lg ring-2 shadow-green-400/30 ring-white/20 backdrop-blur-2xl">
+          <div className="seat-available h-6 w-6 rounded-lg border border-white/20 shadow-lg ring-2 shadow-green-400/40 ring-white/30"></div>
           <span className="font-semibold text-green-900 drop-shadow-[0_1px_4px_rgba(34,197,94,0.5)]">
             Available ({getStatusCount("available")})
           </span>
         </div>
-        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-red-300 via-red-200 to-red-100 px-4 py-2 shadow-lg ring-2 shadow-red-400/30 ring-red-300/30">
-          <div className="seat-reserved h-6 w-6 rounded-lg shadow-lg ring-2 shadow-red-400/40 ring-red-300/60"></div>
+        <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-gradient-to-r from-red-300/70 via-red-200/60 to-red-100/60 px-4 py-2 shadow-lg ring-2 shadow-red-400/30 ring-white/20 backdrop-blur-2xl">
+          <div className="seat-reserved h-6 w-6 rounded-lg border border-white/20 shadow-lg ring-2 shadow-red-400/40 ring-white/30"></div>
           <span className="font-semibold text-red-900 drop-shadow-[0_1px_4px_rgba(239,68,68,0.5)]">
             Reserved ({getStatusCount("reserved")})
           </span>
         </div>
         {/*
-        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-50 px-4 py-2 shadow-lg shadow-yellow-300/30 ring-2 ring-yellow-200/30">
-          <div className="seat-lottery h-6 w-6 rounded-lg shadow-lg shadow-yellow-300/40 ring-2 ring-yellow-200/60"></div>
+        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-yellow-200/60 via-yellow-100/40 to-yellow-50/30 px-4 py-2 shadow-lg shadow-yellow-300/30 ring-2 ring-white/20 border border-white/10 backdrop-blur-2xl">
+          <div className="seat-lottery h-6 w-6 rounded-lg shadow-lg shadow-yellow-300/40 ring-2 ring-white/30 border border-white/20"></div>
           <span className="font-semibold text-yellow-900 drop-shadow-[0_1px_4px_rgba(244,212,27,0.5)]">Lottery ({getStatusCount("lottery")})</span>
         </div>
-        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-blue-200 via-blue-100 to-blue-50 px-4 py-2 shadow-lg shadow-blue-300/30 ring-2 ring-blue-200/30">
-          <div className="seat-lottery-winner h-6 w-6 rounded-lg shadow-lg shadow-blue-300/40 ring-2 ring-blue-200/60"></div>
+        <div className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-blue-200/60 via-blue-100/40 to-blue-50/30 px-4 py-2 shadow-lg shadow-blue-300/30 ring-2 ring-white/20 border border-white/10 backdrop-blur-2xl">
+          <div className="seat-lottery-winner h-6 w-6 rounded-lg shadow-lg shadow-blue-300/40 ring-2 ring-white/30 border border-white/20"></div>
           <span className="font-semibold text-blue-900 drop-shadow-[0_1px_4px_rgba(29,158,217,0.5)]">Winners ({getStatusCount("lottery-winner")})</span>
         </div>
         */}
@@ -69,7 +69,7 @@ export function SeatMap({ seats }: SeatMapProps) {
 
       {/* Stage */}
       <div className="text-center">
-        <div className="mb-8 inline-block rounded-2xl bg-gradient-to-r from-blue-700 via-indigo-700 to-yellow-400 px-12 py-4 text-white shadow-2xl ring-2 shadow-yellow-300/30 ring-yellow-300/40">
+        <div className="mb-8 inline-block rounded-2xl border border-white/10 bg-gradient-to-r from-blue-700/80 via-indigo-700/70 to-yellow-400/70 px-12 py-4 text-white shadow-2xl ring-2 shadow-yellow-300/30 ring-white/20 backdrop-blur-3xl">
           <div className="flex items-center gap-3">
             <div className="h-3 w-3 animate-pulse rounded-full bg-yellow-400 shadow-md shadow-yellow-300/60"></div>
             <span className="text-xl font-bold tracking-wide drop-shadow-[0_1px_8px_rgba(244,212,27,0.7)]">
@@ -88,7 +88,7 @@ export function SeatMap({ seats }: SeatMapProps) {
               <div
                 key={seat.id}
                 className={cn(
-                  "seat flex h-10 w-10 cursor-pointer items-center justify-center text-xs font-bold shadow-xl ring-2",
+                  "seat flex h-10 w-10 cursor-pointer items-center justify-center border border-white/10 text-xs font-bold shadow-xl ring-2 backdrop-blur-xl",
                   getSeatColor(seat.status),
                 )}
                 title={`Seat ${seat.id} - ${seat.status}`}
@@ -125,10 +125,10 @@ export function SeatMap({ seats }: SeatMapProps) {
       {/* Enhanced Info */}
       <div className="space-y-4 text-center">
         <div className="flex justify-center gap-8 text-sm">
-          <Badge className="bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-400 px-4 py-2 text-white shadow-lg ring-2 shadow-blue-400/40 ring-blue-400/60">
+          <Badge className="border border-white/20 bg-gradient-to-r from-blue-500/80 via-indigo-500/80 to-blue-400/80 px-4 py-2 text-white shadow-lg ring-2 shadow-blue-400/40 ring-white/30 backdrop-blur-xl">
             Total Capacity: 70 seats
           </Badge>
-          <Badge className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-400 px-4 py-2 text-black shadow-lg ring-2 shadow-yellow-300/40 ring-yellow-300/60">
+          <Badge className="border border-white/20 bg-gradient-to-r from-yellow-400/80 via-yellow-500/80 to-orange-400/80 px-4 py-2 text-black shadow-lg ring-2 shadow-yellow-300/40 ring-white/30 backdrop-blur-xl">
             7 Rows
           </Badge>
         </div>
