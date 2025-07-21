@@ -11,13 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { toast } from "sonner";
 import { reservationFormSchema } from "@/lib/form-schemas";
 import type { ReservationFormValues } from "@/lib/form-schemas";
@@ -30,25 +24,18 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-
-interface SeatOption {
-  id: string;
-  label: string;
-}
+import { useRouter } from "next/navigation";
 
 interface ReservationModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   eventId: string;
-  // For now, pass available seats as prop (should be fetched server-side in real app)
-  availableSeats?: SeatOption[];
 }
 
 export function ReservationModal({
   open,
   onOpenChange,
   eventId,
-  availableSeats = [],
 }: ReservationModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<ReservationFormValues>({
@@ -58,10 +45,10 @@ export function ReservationModal({
       email: "",
       phone: "",
       occupation: "",
-      seatId: undefined,
       eventId,
     },
   });
+  const router = useRouter();
   const { handleSubmit, reset } = form;
 
   const onSubmit = async (data: ReservationFormValues) => {
@@ -82,6 +69,7 @@ export function ReservationModal({
         });
         onOpenChange(false);
         reset();
+        router.refresh();
       }
     } catch (error) {
       console.error(error);
@@ -148,36 +136,6 @@ export function ReservationModal({
                   <FormLabel>Occupation</FormLabel>
                   <FormControl>
                     <Input id="occupation" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="seatId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Seat Selection</FormLabel>
-                  <FormControl>
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a seat" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {availableSeats.length === 0 ? (
-                          <SelectItem value="" disabled>
-                            No seats available
-                          </SelectItem>
-                        ) : (
-                          availableSeats.map((seat) => (
-                            <SelectItem key={seat.id} value={seat.id}>
-                              {seat.label}
-                            </SelectItem>
-                          ))
-                        )}
-                      </SelectContent>
-                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
