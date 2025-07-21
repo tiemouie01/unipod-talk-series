@@ -1,6 +1,8 @@
 import { getUpcomingEvent } from "@/server/db/queries";
 import { HomePageClient } from "./_components/HomePageClient";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const { data: event, error } = await getUpcomingEvent();
 
