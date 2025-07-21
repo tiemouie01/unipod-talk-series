@@ -1,8 +1,8 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Dialog,
   DialogContent,
@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -20,49 +19,71 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { reservationFormSchema } from "@/lib/form-schemas";
+import type { ReservationFormValues } from "@/lib/form-schemas";
+import { createReservationAction } from "@/server/actions";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+
+interface SeatOption {
+  id: string;
+  label: string;
+}
 
 interface ReservationModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  eventId: number;
+  eventId: string;
+  // For now, pass available seats as prop (should be fetched server-side in real app)
+  availableSeats?: SeatOption[];
 }
 
 export function ReservationModal({
   open,
   onOpenChange,
   eventId,
+  availableSeats = [],
 }: ReservationModalProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    occupation: "",
-    gender: "",
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const form = useForm<ReservationFormValues>({
+    resolver: zodResolver(reservationFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      occupation: "",
+      seatId: undefined,
+    },
+  });
+  const { handleSubmit, reset } = form;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (data: ReservationFormValues) => {
     setIsSubmitting(true);
-
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      toast.success("Reservation Confirmed!", {
-        description:
-          "Your seat has been reserved. Check your email for confirmation details.",
-      });
-
-      onOpenChange(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        occupation: "",
-        gender: "",
-      });
+      const result = await createReservationAction({ ...data, eventId });
+      if (result?.error) {
+        toast.error("Reservation Failed", {
+          description:
+            typeof result.error === "string"
+              ? result.error
+              : "Please check your input.",
+        });
+      } else {
+        toast.success("Reservation Confirmed!", {
+          description:
+            "Your seat has been reserved. Check your email for confirmation details.",
+        });
+        onOpenChange(false);
+        reset();
+      }
     } catch (error) {
+      console.error(error);
       toast.error("Reservation Failed", {
         description: "Please try again later.",
       });
@@ -77,97 +98,109 @@ export function ReservationModal({
         <DialogHeader>
           <DialogTitle>Reserve Your Seat</DialogTitle>
         </DialogHeader>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
-            <Input
-              id="name"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              required
+        <Form {...form}>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Full Name</FormLabel>
+                  <FormControl>
+                    <Input id="name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              required
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email Address</FormLabel>
+                  <FormControl>
+                    <Input id="email" type="email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input
-              id="phone"
-              value={formData.phone}
-              onChange={(e) =>
-                setFormData({ ...formData, phone: e.target.value })
-              }
-              required
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number</FormLabel>
+                  <FormControl>
+                    <Input id="phone" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="occupation">Occupation</Label>
-            <Input
-              id="occupation"
-              value={formData.occupation}
-              onChange={(e) =>
-                setFormData({ ...formData, occupation: e.target.value })
-              }
-              required
+            <FormField
+              control={form.control}
+              name="occupation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Occupation</FormLabel>
+                  <FormControl>
+                    <Input id="occupation" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="gender">Gender</Label>
-            <Select
-              value={formData.gender}
-              onValueChange={(value) =>
-                setFormData({ ...formData, gender: value })
-              }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select gender" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="male">Male</SelectItem>
-                <SelectItem value="female">Female</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-                <SelectItem value="prefer-not-to-say">
-                  Prefer not to say
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex gap-3 pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => onOpenChange(false)}
-              className="flex-1"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="flex-1 bg-orange-600 hover:bg-orange-700"
-            >
-              {isSubmitting ? "Reserving..." : "Reserve Seat"}
-            </Button>
-          </div>
-        </form>
+            <FormField
+              control={form.control}
+              name="seatId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Seat Selection</FormLabel>
+                  <FormControl>
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a seat" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {availableSeats.length === 0 ? (
+                          <SelectItem value="" disabled>
+                            No seats available
+                          </SelectItem>
+                        ) : (
+                          availableSeats.map((seat) => (
+                            <SelectItem key={seat.id} value={seat.id}>
+                              {seat.label}
+                            </SelectItem>
+                          ))
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex gap-3 pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => onOpenChange(false)}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex-1 bg-orange-600 hover:bg-orange-700"
+              >
+                {isSubmitting ? "Reserving..." : "Reserve Seat"}
+              </Button>
+            </div>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
