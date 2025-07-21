@@ -83,9 +83,13 @@ export function ReservationModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="border border-gray-200 bg-white/70 shadow-none backdrop-blur-md sm:max-w-md dark:border-white/10 dark:bg-black/60">
         <DialogHeader>
-          <DialogTitle>Reserve Your Seat</DialogTitle>
+          <DialogTitle>
+            <span className="font-semibold text-gray-900 dark:text-white/90">
+              Reserve Your Seat
+            </span>
+          </DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -94,9 +98,15 @@ export function ReservationModal({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Full Name
+                  </FormLabel>
                   <FormControl>
-                    <Input id="name" {...field} />
+                    <Input
+                      id="name"
+                      {...field}
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-blue-300 focus:ring-2 focus:ring-blue-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-blue-400/60 dark:focus:ring-blue-400/30"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -107,9 +117,16 @@ export function ReservationModal({
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Email Address
+                  </FormLabel>
                   <FormControl>
-                    <Input id="email" type="email" {...field} />
+                    <Input
+                      id="email"
+                      type="email"
+                      {...field}
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-blue-300 focus:ring-2 focus:ring-blue-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-blue-400/60 dark:focus:ring-blue-400/30"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,9 +137,15 @@ export function ReservationModal({
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Phone Number
+                  </FormLabel>
                   <FormControl>
-                    <Input id="phone" {...field} />
+                    <Input
+                      id="phone"
+                      {...field}
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-yellow-300/60 dark:focus:ring-yellow-300/30"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,9 +156,15 @@ export function ReservationModal({
               name="occupation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Occupation</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Occupation
+                  </FormLabel>
                   <FormControl>
-                    <Input id="occupation" {...field} />
+                    <Input
+                      id="occupation"
+                      {...field}
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-yellow-300/60 dark:focus:ring-yellow-300/30"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -146,14 +175,14 @@ export function ReservationModal({
                 type="button"
                 variant="outline"
                 onClick={() => onOpenChange(false)}
-                className="flex-1"
+                className="flex-1 border border-gray-200 bg-white/60 text-gray-900 hover:bg-gray-100 dark:border-white/10 dark:bg-black/40 dark:text-white dark:hover:bg-white/10"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-orange-600 hover:bg-orange-700"
+                className="flex-1 border border-blue-300 bg-white/70 font-semibold text-blue-700 hover:bg-blue-100 hover:text-blue-800 dark:border-blue-400/40 dark:bg-black/60 dark:text-blue-200 dark:hover:bg-blue-900/30 dark:hover:text-blue-100"
               >
                 {isSubmitting ? "Reserving..." : "Reserve Seat"}
               </Button>

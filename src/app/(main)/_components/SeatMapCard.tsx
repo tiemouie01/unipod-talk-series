@@ -11,14 +11,16 @@ type Seat = {
 
 export function SeatMapCard({ seats }: { seats: Seat[] }) {
   return (
-    <Card className="unipod-glow mx-auto flex w-full max-w-2xl flex-col bg-white/40 p-0 py-2 shadow-lg backdrop-blur-md sm:p-0 md:p-2 lg:p-6">
+    <Card className="mx-auto flex w-full flex-col border border-gray-200 bg-white/70 p-0 py-2 shadow-none backdrop-blur-md sm:p-0 md:p-2 lg:p-6 dark:border-white/10 dark:bg-black/60">
       <CardHeader className="px-4 pb-2 sm:px-6 sm:pb-4">
-        <CardTitle className="flex items-center gap-3 text-xl sm:text-2xl">
-          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 sm:mb-0">
-            <Users className="h-5 w-5 text-white" />
+        <CardTitle className="flex items-center gap-2 text-lg text-gray-900 dark:text-white">
+          <div className="mb-2 flex h-8 w-8 items-center justify-center rounded border border-blue-300 bg-blue-100 sm:mb-0 dark:border-blue-400/40 dark:bg-blue-400/10">
+            <Users className="h-4 w-4 text-blue-700 dark:text-blue-200" />
           </div>
-          <span className="gradient-text">Live Seat Map</span>
-          <Badge className="ml-0 animate-pulse bg-blue-600 text-white sm:ml-2">
+          <span className="font-semibold text-gray-900 dark:text-white/90">
+            Live Seat Map
+          </span>
+          <Badge className="ml-0 border border-blue-300 bg-white/70 text-blue-700 sm:ml-2 dark:border-blue-400/40 dark:bg-black/60 dark:text-blue-200">
             Real-time Updates
           </Badge>
         </CardTitle>
