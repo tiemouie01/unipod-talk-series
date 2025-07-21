@@ -59,6 +59,7 @@ export function ReservationModal({
       phone: "",
       occupation: "",
       seatId: undefined,
+      eventId,
     },
   });
   const { handleSubmit, reset } = form;
@@ -66,7 +67,7 @@ export function ReservationModal({
   const onSubmit = async (data: ReservationFormValues) => {
     setIsSubmitting(true);
     try {
-      const result = await createReservationAction({ ...data, eventId });
+      const result = await createReservationAction(data);
       if (result?.error) {
         toast.error("Reservation Failed", {
           description:
