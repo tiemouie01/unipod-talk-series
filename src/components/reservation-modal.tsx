@@ -83,10 +83,10 @@ export function ReservationModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="border border-white/10 bg-black/60 shadow-none backdrop-blur-md sm:max-w-md">
+      <DialogContent className="border border-gray-200 bg-white/70 shadow-none backdrop-blur-md sm:max-w-md dark:border-white/10 dark:bg-black/60">
         <DialogHeader>
           <DialogTitle>
-            <span className="font-semibold text-white/90">
+            <span className="font-semibold text-gray-900 dark:text-white/90">
               Reserve Your Seat
             </span>
           </DialogTitle>
@@ -98,12 +98,14 @@ export function ReservationModal({
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white/80">Full Name</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Full Name
+                  </FormLabel>
                   <FormControl>
                     <Input
                       id="name"
                       {...field}
-                      className="border border-white/10 bg-black/40 text-white backdrop-blur-md placeholder:text-gray-400 focus:border-blue-400/60 focus:ring-2 focus:ring-blue-400/30"
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-blue-300 focus:ring-2 focus:ring-blue-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-blue-400/60 dark:focus:ring-blue-400/30"
                     />
                   </FormControl>
                   <FormMessage />
@@ -115,13 +117,15 @@ export function ReservationModal({
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white/80">Email Address</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Email Address
+                  </FormLabel>
                   <FormControl>
                     <Input
                       id="email"
                       type="email"
                       {...field}
-                      className="border border-white/10 bg-black/40 text-white backdrop-blur-md placeholder:text-gray-400 focus:border-blue-400/60 focus:ring-2 focus:ring-blue-400/30"
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-blue-300 focus:ring-2 focus:ring-blue-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-blue-400/60 dark:focus:ring-blue-400/30"
                     />
                   </FormControl>
                   <FormMessage />
@@ -133,12 +137,14 @@ export function ReservationModal({
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white/80">Phone Number</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Phone Number
+                  </FormLabel>
                   <FormControl>
                     <Input
                       id="phone"
                       {...field}
-                      className="border border-white/10 bg-black/40 text-white backdrop-blur-md placeholder:text-gray-400 focus:border-yellow-300/60 focus:ring-2 focus:ring-yellow-300/30"
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-yellow-300/60 dark:focus:ring-yellow-300/30"
                     />
                   </FormControl>
                   <FormMessage />
@@ -150,12 +156,14 @@ export function ReservationModal({
               name="occupation"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-white/80">Occupation</FormLabel>
+                  <FormLabel className="text-gray-900 dark:text-white/80">
+                    Occupation
+                  </FormLabel>
                   <FormControl>
                     <Input
                       id="occupation"
                       {...field}
-                      className="border border-white/10 bg-black/40 text-white backdrop-blur-md placeholder:text-gray-400 focus:border-yellow-300/60 focus:ring-2 focus:ring-yellow-300/30"
+                      className="border border-gray-200 bg-white/60 text-gray-900 backdrop-blur-md placeholder:text-gray-400 focus:border-yellow-300 focus:ring-2 focus:ring-yellow-200 dark:border-white/10 dark:bg-black/40 dark:text-white dark:focus:border-yellow-300/60 dark:focus:ring-yellow-300/30"
                     />
                   </FormControl>
                   <FormMessage />
@@ -167,14 +175,14 @@ export function ReservationModal({
                 type="button"
                 variant="outline"
                 onClick={() => onOpenChange(false)}
-                className="flex-1 border border-white/10 bg-black/40 text-white hover:bg-white/10"
+                className="flex-1 border border-gray-200 bg-white/60 text-gray-900 hover:bg-gray-100 dark:border-white/10 dark:bg-black/40 dark:text-white dark:hover:bg-white/10"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 border border-blue-400/40 bg-black/60 font-semibold text-blue-200 hover:bg-blue-900/30 hover:text-blue-100"
+                className="flex-1 border border-blue-300 bg-white/70 font-semibold text-blue-700 hover:bg-blue-100 hover:text-blue-800 dark:border-blue-400/40 dark:bg-black/60 dark:text-blue-200 dark:hover:bg-blue-900/30 dark:hover:text-blue-100"
               >
                 {isSubmitting ? "Reserving..." : "Reserve Seat"}
               </Button>

@@ -44,15 +44,15 @@ export function SeatMap({ seats }: SeatMapProps) {
     <div className="space-y-8">
       {/* Minimalist Legend */}
       <div className="flex flex-wrap justify-center gap-4">
-        <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/60 px-3 py-1 backdrop-blur-md">
-          <div className="seat-available h-5 w-5 rounded border border-green-400/60 bg-green-400/10" />
-          <span className="text-sm font-medium text-green-200">
+        <div className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white/70 px-3 py-1 backdrop-blur-md dark:border-white/10 dark:bg-black/60">
+          <div className="seat-available h-5 w-5 rounded border border-green-400/60 bg-green-100 dark:border-green-400/60 dark:bg-green-400/10" />
+          <span className="text-sm font-medium text-green-700 dark:text-green-200">
             Available ({getStatusCount("available")})
           </span>
         </div>
-        <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/60 px-3 py-1 backdrop-blur-md">
-          <div className="seat-reserved h-5 w-5 rounded border border-red-400/60 bg-red-400/10" />
-          <span className="text-sm font-medium text-red-200">
+        <div className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white/70 px-3 py-1 backdrop-blur-md dark:border-white/10 dark:bg-black/60">
+          <div className="seat-reserved h-5 w-5 rounded border border-red-400/60 bg-red-100 dark:border-red-400/60 dark:bg-red-400/10" />
+          <span className="text-sm font-medium text-red-700 dark:text-red-200">
             Reserved ({getStatusCount("reserved")})
           </span>
         </div>
@@ -60,8 +60,8 @@ export function SeatMap({ seats }: SeatMapProps) {
 
       {/* Stage */}
       <div className="text-center">
-        <div className="mb-8 inline-block rounded-xl border border-white/10 bg-black/60 px-10 py-3 text-white backdrop-blur-md">
-          <span className="text-base font-semibold tracking-wide text-yellow-200">
+        <div className="mb-8 inline-block rounded-xl border border-gray-200 bg-white/70 px-10 py-3 text-gray-900 backdrop-blur-md dark:border-white/10 dark:bg-black/60 dark:text-white">
+          <span className="text-base font-semibold tracking-wide text-yellow-700 dark:text-yellow-200">
             STAGE
           </span>
         </div>
@@ -77,14 +77,14 @@ export function SeatMap({ seats }: SeatMapProps) {
                 className={cn(
                   "seat flex h-8 w-8 items-center justify-center rounded border text-xs font-semibold transition-colors duration-150",
                   seat.status === "available"
-                    ? "border-green-400/60 bg-green-400/10 text-green-100"
+                    ? "border-green-400/60 bg-green-100 text-green-700 dark:border-green-400/60 dark:bg-green-400/10 dark:text-green-100"
                     : seat.status === "reserved"
-                      ? "border-red-400/60 bg-red-400/10 text-red-100"
+                      ? "border-red-400/60 bg-red-100 text-red-700 dark:border-red-400/60 dark:bg-red-400/10 dark:text-red-100"
                       : seat.status === "lottery"
-                        ? "border-yellow-300/60 bg-yellow-300/10 text-yellow-100"
+                        ? "border-yellow-300/60 bg-yellow-100 text-yellow-700 dark:border-yellow-300/60 dark:bg-yellow-300/10 dark:text-yellow-100"
                         : seat.status === "lottery-winner"
-                          ? "border-blue-400/60 bg-blue-400/10 text-blue-100"
-                          : "border-white/10 bg-white/5 text-white/80",
+                          ? "border-blue-400/60 bg-blue-100 text-blue-700 dark:border-blue-400/60 dark:bg-blue-400/10 dark:text-blue-100"
+                          : "border-gray-200 bg-white text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-white/80",
                 )}
                 title={`Seat ${seat.id} - ${seat.status}`}
                 style={{
@@ -101,10 +101,10 @@ export function SeatMap({ seats }: SeatMapProps) {
       {/* Minimalist Info */}
       <div className="space-y-2 text-center">
         <div className="flex justify-center gap-4 text-xs">
-          <Badge className="border border-white/10 bg-black/60 px-3 py-1 font-normal text-white/80 backdrop-blur-md">
+          <Badge className="border border-gray-200 bg-white/70 px-3 py-1 font-normal text-gray-900 backdrop-blur-md dark:border-white/10 dark:bg-black/60 dark:text-white/80">
             Total Capacity: 70 seats
           </Badge>
-          <Badge className="border border-white/10 bg-black/60 px-3 py-1 font-normal text-white/80 backdrop-blur-md">
+          <Badge className="border border-gray-200 bg-white/70 px-3 py-1 font-normal text-gray-900 backdrop-blur-md dark:border-white/10 dark:bg-black/60 dark:text-white/80">
             7 Rows
           </Badge>
         </div>
