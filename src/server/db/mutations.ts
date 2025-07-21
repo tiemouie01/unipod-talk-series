@@ -1,6 +1,12 @@
 import type { CreateEventValues, UpdateEventValues } from "@/types/events";
 import { db } from ".";
-import { event, seat, eventActivityLog } from "./schema";
+import {
+  event,
+  seat,
+  eventActivityLog,
+  speaker,
+  eventSpeakers,
+} from "./schema";
 import { eq } from "drizzle-orm";
 
 export const createEvent = async function (values: CreateEventValues) {
@@ -34,6 +40,13 @@ export const createEvent = async function (values: CreateEventValues) {
             isReserved: false,
           }),
         );
+        const speakerData = await tx
+          .insert(speaker)
+          .values({ name: values.speaker, title: values.speakerTitle })
+          .returning();
+        await tx
+          .insert(eventSpeakers)
+          .values({ eventId: eventData[0]!.id, speakerId: speakerData[0]!.id });
         await tx.insert(seat).values(seats);
         await tx.insert(eventActivityLog).values({
           eventId: eventData[0]!.id,
