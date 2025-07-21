@@ -18,14 +18,15 @@ export default function MainLayout({
           height={450}
           className="col-start-1 row-start-1 h-full w-full object-cover"
         />
-        <div className="col-start-1 row-start-1 h-full w-full bg-black/60" />
+        <div className="col-start-1 row-start-1 h-full w-full bg-gradient-to-br from-blue-900/80 via-slate-900/90 to-blue-950/80" />
       </div>
       {/* Header in the first row */}
-      <div className="z-10 col-start-1 row-start-1">
-        <Header />
-      </div>
+      <Header />
       {/* Content scrolls in the second row */}
-      <div className="col-start-1 row-start-2 overflow-auto">{children}</div>
+      <div className="col-start-1 row-start-2 overflow-auto">
+        <div className="h-14" />
+        <div>{children}</div>
+      </div>
     </div>
   );
 }
