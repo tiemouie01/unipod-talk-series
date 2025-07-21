@@ -5,7 +5,6 @@ export const reservationFormSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(7, "Phone number is required"),
   occupation: z.string().min(2, "Occupation is required"),
-  seatId: z.string().uuid("Seat selection is required"),
   eventId: z.string().uuid("Event selection is required"),
 });
 
