@@ -4,14 +4,21 @@ import { EventPosterSkeleton } from "./_components/EventPoster";
 
 export default function Loading() {
   return (
-    <div className="grid min-h-screen grid-cols-1 gap-8 bg-white/60 p-8 md:grid-cols-3 md:gap-12 dark:bg-black/60">
-      <div className="space-y-8 md:col-span-2">
-        <EventDetailsSkeleton />
-        <SeatMapSkeleton />
-      </div>
-      <div className="hidden md:block">
-        <EventPosterSkeleton />
-      </div>
+    <div
+      className="grid min-h-screen w-full"
+      style={{ gridTemplateRows: "1fr" }}
+    >
+      <main className="flex w-full flex-1 flex-col items-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid w-full max-w-7xl gap-12">
+          <div className="mb-12 grid grid-cols-1 gap-12 xl:grid-cols-2">
+            <div className="space-y-8">
+              <EventPosterSkeleton />
+            </div>
+            <EventDetailsSkeleton />
+          </div>
+          <SeatMapSkeleton />
+        </div>
+      </main>
     </div>
   );
 }
